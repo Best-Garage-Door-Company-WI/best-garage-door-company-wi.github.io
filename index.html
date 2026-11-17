@@ -124,9 +124,8 @@
   .step h3 { margin-bottom: 6px; }
   .step p { color: #aab3bd; font-size: .96rem; }
 
-  .area { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-  .towns { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-  .towns li { padding: 10px 0; border-bottom: 1px solid #ddd8cd; font-weight: 600; }
+  .towns { list-style: none; columns: 5 160px; column-gap: 28px; }
+  .towns li { padding: 7px 0; border-bottom: 1px solid #ddd8cd; font-weight: 600; font-size: .93rem; break-inside: avoid; }
 
   .contact { background: var(--amber); text-align: center; }
   .contact h2 { margin-bottom: 10px; }
@@ -142,7 +141,7 @@
 
   @media (max-width: 860px) {
     nav a:not(.btn) { display: none; }
-    .hero .wrap, .area { grid-template-columns: 1fr; }
+    .hero .wrap { grid-template-columns: 1fr; }
     .cta { margin-bottom: 40px; }
     .grid, .steps { grid-template-columns: 1fr; }
     section { padding: 56px 0; }
@@ -251,19 +250,201 @@
   </section>
 
   <section id="area">
-    <div class="wrap area">
-      <div>
-        <h2>Where we work</h2>
-        <p class="sub">We serve homeowners and businesses across our part of Wisconsin. Not sure if you're in range? Call and ask.</p>
-      </div>
-      <!-- EDIT: replace with the cities and towns you serve -->
+    <div class="wrap">
+      <h2>Where we work</h2>
+      <p class="sub">We serve homeowners and businesses in all 190 Wisconsin cities. Find yours below, or call and ask.</p>
+      <!-- EDIT: remove any cities you don't serve -->
       <ul class="towns">
-        <li>[City or town 1]</li>
-        <li>[City or town 2]</li>
-        <li>[City or town 3]</li>
-        <li>[City or town 4]</li>
-        <li>[City or town 5]</li>
-        <li>[City or town 6]</li>
+        <li>Abbotsford</li>
+        <li>Adams</li>
+        <li>Algoma</li>
+        <li>Alma</li>
+        <li>Altoona</li>
+        <li>Amery</li>
+        <li>Antigo</li>
+        <li>Appleton</li>
+        <li>Arcadia</li>
+        <li>Ashland</li>
+        <li>Augusta</li>
+        <li>Baraboo</li>
+        <li>Barron</li>
+        <li>Bayfield</li>
+        <li>Beaver Dam</li>
+        <li>Beloit</li>
+        <li>Berlin</li>
+        <li>Black River Falls</li>
+        <li>Blair</li>
+        <li>Bloomer</li>
+        <li>Boscobel</li>
+        <li>Brillion</li>
+        <li>Brodhead</li>
+        <li>Brookfield</li>
+        <li>Buffalo City</li>
+        <li>Burlington</li>
+        <li>Cedarburg</li>
+        <li>Chetek</li>
+        <li>Chilton</li>
+        <li>Chippewa Falls</li>
+        <li>Clintonville</li>
+        <li>Colby</li>
+        <li>Columbus</li>
+        <li>Cornell</li>
+        <li>Crandon</li>
+        <li>Cuba City</li>
+        <li>Cudahy</li>
+        <li>Cumberland</li>
+        <li>Darlington</li>
+        <li>De Pere</li>
+        <li>Delafield</li>
+        <li>Delavan</li>
+        <li>Dodgeville</li>
+        <li>Durand</li>
+        <li>Eagle River</li>
+        <li>Eau Claire</li>
+        <li>Edgerton</li>
+        <li>Elkhorn</li>
+        <li>Elroy</li>
+        <li>Evansville</li>
+        <li>Fennimore</li>
+        <li>Fitchburg</li>
+        <li>Fond du Lac</li>
+        <li>Fort Atkinson</li>
+        <li>Fountain City</li>
+        <li>Fox Lake</li>
+        <li>Franklin</li>
+        <li>Galesville</li>
+        <li>Gillett</li>
+        <li>Glendale</li>
+        <li>Glenwood City</li>
+        <li>Green Bay</li>
+        <li>Green Lake</li>
+        <li>Greenfield</li>
+        <li>Greenwood</li>
+        <li>Hartford</li>
+        <li>Hayward</li>
+        <li>Hillsboro</li>
+        <li>Horicon</li>
+        <li>Hudson</li>
+        <li>Hurley</li>
+        <li>Independence</li>
+        <li>Janesville</li>
+        <li>Jefferson</li>
+        <li>Juneau</li>
+        <li>Kaukauna</li>
+        <li>Kenosha</li>
+        <li>Kewaunee</li>
+        <li>Kiel</li>
+        <li>La Crosse</li>
+        <li>Ladysmith</li>
+        <li>Lake Geneva</li>
+        <li>Lake Mills</li>
+        <li>Lancaster</li>
+        <li>Lodi</li>
+        <li>Loyal</li>
+        <li>Madison</li>
+        <li>Manawa</li>
+        <li>Manitowoc</li>
+        <li>Marinette</li>
+        <li>Marion</li>
+        <li>Markesan</li>
+        <li>Marshfield</li>
+        <li>Mauston</li>
+        <li>Mayville</li>
+        <li>Medford</li>
+        <li>Mellen</li>
+        <li>Menasha</li>
+        <li>Menomonie</li>
+        <li>Mequon</li>
+        <li>Merrill</li>
+        <li>Middleton</li>
+        <li>Milton</li>
+        <li>Milwaukee</li>
+        <li>Mineral Point</li>
+        <li>Mondovi</li>
+        <li>Monona</li>
+        <li>Monroe</li>
+        <li>Montello</li>
+        <li>Montreal</li>
+        <li>Mosinee</li>
+        <li>Muskego</li>
+        <li>Neenah</li>
+        <li>Neillsville</li>
+        <li>Nekoosa</li>
+        <li>New Berlin</li>
+        <li>New Holstein</li>
+        <li>New Lisbon</li>
+        <li>New London</li>
+        <li>New Richmond</li>
+        <li>Niagara</li>
+        <li>Oak Creek</li>
+        <li>Oconomowoc</li>
+        <li>Oconto</li>
+        <li>Oconto Falls</li>
+        <li>Omro</li>
+        <li>Onalaska</li>
+        <li>Oshkosh</li>
+        <li>Osseo</li>
+        <li>Owen</li>
+        <li>Park Falls</li>
+        <li>Peshtigo</li>
+        <li>Pewaukee</li>
+        <li>Phillips</li>
+        <li>Pittsville</li>
+        <li>Platteville</li>
+        <li>Plymouth</li>
+        <li>Port Washington</li>
+        <li>Portage</li>
+        <li>Prairie du Chien</li>
+        <li>Prescott</li>
+        <li>Princeton</li>
+        <li>Racine</li>
+        <li>Reedsburg</li>
+        <li>Rhinelander</li>
+        <li>Rice Lake</li>
+        <li>Richland Center</li>
+        <li>Ripon</li>
+        <li>River Falls</li>
+        <li>St. Croix Falls</li>
+        <li>St. Francis</li>
+        <li>Schofield</li>
+        <li>Seymour</li>
+        <li>Shawano</li>
+        <li>Sheboygan</li>
+        <li>Sheboygan Falls</li>
+        <li>Shell Lake</li>
+        <li>Shullsburg</li>
+        <li>South Milwaukee</li>
+        <li>Sparta</li>
+        <li>Spooner</li>
+        <li>Stanley</li>
+        <li>Stevens Point</li>
+        <li>Stoughton</li>
+        <li>Sturgeon Bay</li>
+        <li>Sun Prairie</li>
+        <li>Superior</li>
+        <li>Thorp</li>
+        <li>Tomah</li>
+        <li>Tomahawk</li>
+        <li>Two Rivers</li>
+        <li>Verona</li>
+        <li>Viroqua</li>
+        <li>Washburn</li>
+        <li>Waterloo</li>
+        <li>Watertown</li>
+        <li>Waukesha</li>
+        <li>Waupaca</li>
+        <li>Waupun</li>
+        <li>Wausau</li>
+        <li>Wautoma</li>
+        <li>Wauwatosa</li>
+        <li>West Allis</li>
+        <li>West Bend</li>
+        <li>Westby</li>
+        <li>Weyauwega</li>
+        <li>Whitehall</li>
+        <li>Whitewater</li>
+        <li>Wisconsin Dells</li>
+        <li>Wisconsin Rapids</li>
       </ul>
     </div>
   </section>
