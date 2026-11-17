@@ -124,8 +124,17 @@
   .step h3 { margin-bottom: 6px; }
   .step p { color: #aab3bd; font-size: .96rem; }
 
-  .towns { list-style: none; columns: 5 160px; column-gap: 28px; }
-  .towns li { padding: 7px 0; border-bottom: 1px solid #ddd8cd; font-weight: 600; font-size: .93rem; break-inside: avoid; }
+  .towns { list-style: none; columns: 4 180px; column-gap: 28px; margin-bottom: 48px; }
+  .towns li { padding: 8px 0; border-bottom: 1px solid #ddd8cd; font-weight: 600; font-size: .95rem; break-inside: avoid; }
+  .towns a, .epoxy-card a { color: var(--ink); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .towns a:hover, .epoxy-card a:hover { color: var(--amber-dark); }
+  .epoxy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .epoxy-card { background: #fff; padding: 28px; border-radius: 4px; border-top: 4px solid var(--amber); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .epoxy-card h3 { font-size: 1.25rem; line-height: 1.2; }
+  .epoxy-card .epoxy-name { font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 4px 0 14px; }
+  .epoxy-card .epoxy-name a { color: inherit; }
+  .epoxy-card p + p { margin-top: 12px; }
+  .epoxy-card p { font-size: .96rem; }
 
   .contact { background: var(--amber); text-align: center; }
   .contact h2 { margin-bottom: 10px; }
@@ -141,7 +150,7 @@
 
   @media (max-width: 860px) {
     nav a:not(.btn) { display: none; }
-    .hero .wrap { grid-template-columns: 1fr; }
+    .hero .wrap, .epoxy-grid { grid-template-columns: 1fr; }
     .cta { margin-bottom: 40px; }
     .grid, .steps { grid-template-columns: 1fr; }
     section { padding: 56px 0; }
@@ -152,7 +161,7 @@
 
 <!-- ============================================================
      EDIT ME: search this file for "EDIT" to find every placeholder
-     (phone number, email, hours, address, towns served).
+     (phone number, email, hours, address).
      ============================================================ -->
 
 <header>
@@ -161,7 +170,7 @@
     <nav>
       <a href="#services">Services</a>
       <a href="#how">How it works</a>
-      <a href="#area">Service area</a>
+      <a href="#epoxy">Epoxy flooring</a>
       <!-- EDIT: phone number (both the tel: link and the visible text) -->
       <a class="btn" href="tel:+10000000000">Call (000) 000-0000</a>
     </nav>
@@ -249,203 +258,281 @@
     </div>
   </section>
 
-  <section id="area">
+  <section id="epoxy">
     <div class="wrap">
-      <h2>Where we work</h2>
-      <p class="sub">We serve homeowners and businesses in all 190 Wisconsin cities. Find yours below, or call and ask.</p>
-      <!-- EDIT: remove any cities you don't serve -->
+      <h2>The Best Epoxy Flooring Company</h2>
+      <p class="sub">A new garage door deserves a floor to match. These epoxy flooring companies coat garage, patio and commercial floors in the cities below. Select a city to visit its website.</p>
       <ul class="towns">
-        <li>Abbotsford</li>
-        <li>Adams</li>
-        <li>Algoma</li>
-        <li>Alma</li>
-        <li>Altoona</li>
-        <li>Amery</li>
-        <li>Antigo</li>
-        <li>Appleton</li>
-        <li>Arcadia</li>
-        <li>Ashland</li>
-        <li>Augusta</li>
-        <li>Baraboo</li>
-        <li>Barron</li>
-        <li>Bayfield</li>
-        <li>Beaver Dam</li>
-        <li>Beloit</li>
-        <li>Berlin</li>
-        <li>Black River Falls</li>
-        <li>Blair</li>
-        <li>Bloomer</li>
-        <li>Boscobel</li>
-        <li>Brillion</li>
-        <li>Brodhead</li>
-        <li>Brookfield</li>
-        <li>Buffalo City</li>
-        <li>Burlington</li>
-        <li>Cedarburg</li>
-        <li>Chetek</li>
-        <li>Chilton</li>
-        <li>Chippewa Falls</li>
-        <li>Clintonville</li>
-        <li>Colby</li>
-        <li>Columbus</li>
-        <li>Cornell</li>
-        <li>Crandon</li>
-        <li>Cuba City</li>
-        <li>Cudahy</li>
-        <li>Cumberland</li>
-        <li>Darlington</li>
-        <li>De Pere</li>
-        <li>Delafield</li>
-        <li>Delavan</li>
-        <li>Dodgeville</li>
-        <li>Durand</li>
-        <li>Eagle River</li>
-        <li>Eau Claire</li>
-        <li>Edgerton</li>
-        <li>Elkhorn</li>
-        <li>Elroy</li>
-        <li>Evansville</li>
-        <li>Fennimore</li>
-        <li>Fitchburg</li>
-        <li>Fond du Lac</li>
-        <li>Fort Atkinson</li>
-        <li>Fountain City</li>
-        <li>Fox Lake</li>
-        <li>Franklin</li>
-        <li>Galesville</li>
-        <li>Gillett</li>
-        <li>Glendale</li>
-        <li>Glenwood City</li>
-        <li>Green Bay</li>
-        <li>Green Lake</li>
-        <li>Greenfield</li>
-        <li>Greenwood</li>
-        <li>Hartford</li>
-        <li>Hayward</li>
-        <li>Hillsboro</li>
-        <li>Horicon</li>
-        <li>Hudson</li>
-        <li>Hurley</li>
-        <li>Independence</li>
-        <li>Janesville</li>
-        <li>Jefferson</li>
-        <li>Juneau</li>
-        <li>Kaukauna</li>
-        <li>Kenosha</li>
-        <li>Kewaunee</li>
-        <li>Kiel</li>
-        <li>La Crosse</li>
-        <li>Ladysmith</li>
-        <li>Lake Geneva</li>
-        <li>Lake Mills</li>
-        <li>Lancaster</li>
-        <li>Lodi</li>
-        <li>Loyal</li>
-        <li>Madison</li>
-        <li>Manawa</li>
-        <li>Manitowoc</li>
-        <li>Marinette</li>
-        <li>Marion</li>
-        <li>Markesan</li>
-        <li>Marshfield</li>
-        <li>Mauston</li>
-        <li>Mayville</li>
-        <li>Medford</li>
-        <li>Mellen</li>
-        <li>Menasha</li>
-        <li>Menomonie</li>
-        <li>Mequon</li>
-        <li>Merrill</li>
-        <li>Middleton</li>
-        <li>Milton</li>
-        <li>Milwaukee</li>
-        <li>Mineral Point</li>
-        <li>Mondovi</li>
-        <li>Monona</li>
-        <li>Monroe</li>
-        <li>Montello</li>
-        <li>Montreal</li>
-        <li>Mosinee</li>
-        <li>Muskego</li>
-        <li>Neenah</li>
-        <li>Neillsville</li>
-        <li>Nekoosa</li>
-        <li>New Berlin</li>
-        <li>New Holstein</li>
-        <li>New Lisbon</li>
-        <li>New London</li>
-        <li>New Richmond</li>
-        <li>Niagara</li>
-        <li>Oak Creek</li>
-        <li>Oconomowoc</li>
-        <li>Oconto</li>
-        <li>Oconto Falls</li>
-        <li>Omro</li>
-        <li>Onalaska</li>
-        <li>Oshkosh</li>
-        <li>Osseo</li>
-        <li>Owen</li>
-        <li>Park Falls</li>
-        <li>Peshtigo</li>
-        <li>Pewaukee</li>
-        <li>Phillips</li>
-        <li>Pittsville</li>
-        <li>Platteville</li>
-        <li>Plymouth</li>
-        <li>Port Washington</li>
-        <li>Portage</li>
-        <li>Prairie du Chien</li>
-        <li>Prescott</li>
-        <li>Princeton</li>
-        <li>Racine</li>
-        <li>Reedsburg</li>
-        <li>Rhinelander</li>
-        <li>Rice Lake</li>
-        <li>Richland Center</li>
-        <li>Ripon</li>
-        <li>River Falls</li>
-        <li>St. Croix Falls</li>
-        <li>St. Francis</li>
-        <li>Schofield</li>
-        <li>Seymour</li>
-        <li>Shawano</li>
-        <li>Sheboygan</li>
-        <li>Sheboygan Falls</li>
-        <li>Shell Lake</li>
-        <li>Shullsburg</li>
-        <li>South Milwaukee</li>
-        <li>Sparta</li>
-        <li>Spooner</li>
-        <li>Stanley</li>
-        <li>Stevens Point</li>
-        <li>Stoughton</li>
-        <li>Sturgeon Bay</li>
-        <li>Sun Prairie</li>
-        <li>Superior</li>
-        <li>Thorp</li>
-        <li>Tomah</li>
-        <li>Tomahawk</li>
-        <li>Two Rivers</li>
-        <li>Verona</li>
-        <li>Viroqua</li>
-        <li>Washburn</li>
-        <li>Waterloo</li>
-        <li>Watertown</li>
-        <li>Waukesha</li>
-        <li>Waupaca</li>
-        <li>Waupun</li>
-        <li>Wausau</li>
-        <li>Wautoma</li>
-        <li>Wauwatosa</li>
-        <li>West Allis</li>
-        <li>West Bend</li>
-        <li>Westby</li>
-        <li>Weyauwega</li>
-        <li>Whitehall</li>
-        <li>Whitewater</li>
-        <li>Wisconsin Dells</li>
-        <li>Wisconsin Rapids</li>
+        <li><a href="https://apachejunctionepoxy.com/">Apache Junction, AZ</a></li>
+        <li><a href="https://elmirageepoxy.com/">El Mirage, AZ</a></li>
+        <li><a href="https://epoxyflooringqueencreekaz.com/">Queen Creek, AZ</a></li>
+        <li><a href="https://fountainhillsepoxy.com/">Fountain Hills, AZ</a></li>
+        <li><a href="https://paradisevalleyepoxy.com/">Paradise Valley, AZ</a></li>
+        <li><a href="https://epoxyflooringtempeaz.com/">Tempe, AZ</a></li>
+        <li><a href="https://epoxyflooringchandleraz.com">Chandler, AZ</a></li>
+        <li><a href="https://glendaleepoxyflooringguys.com">Glendale, AZ</a></li>
+        <li><a href="https://epoxyflooringsurprise.com">Surprise, AZ</a></li>
+        <li><a href="https://avondaleepoxyflooring.com/">Avondale, AZ</a></li>
+        <li><a href="https://epoxyflooringscottsdaleaz.com">Scottsdale, AZ</a></li>
+        <li><a href="https://mesaepoxyflooringpros.com">Mesa, AZ</a></li>
+        <li><a href="https://epoxyflooringmaricopa.com">Maricopa, AZ</a></li>
+        <li><a href="https://phoenixepoxyflooringpros.com">Phoenix, AZ</a></li>
+        <li><a href="https://goldcanyonepoxyflooring.com">Gold Canyon, AZ</a></li>
+        <li><a href="https://peoriaepoxyflooringpros.com">Peoria, AZ</a></li>
+        <li><a href="https://gilbertepoxyflooringpros.com">Gilbert, AZ</a></li>
+        <li><a href="https://epoxyflooringsantanvalleyaz.com">San Tan Valley, AZ</a></li>
+        <li><a href="https://newriverepoxyflooring.com">New River, AZ</a></li>
+        <li><a href="http://waukeshaeliteepoxyflooring.com/">Waukesha, WI</a></li>
+        <li><a href="https://lakehavasucityepoxy.com">Lake Havasu City, AZ</a></li>
+        <li><a href="https://prescottvalleyepoxy.com">Prescott Valley, AZ</a></li>
+        <li><a href="https://prescotteliteepoxyflooring.com">Prescott, AZ</a></li>
+        <li><a href="https://bullheadcityepoxy.com">Bullhead City, AZ</a></li>
+        <li><a href="https://epoxyflooringkingmanaz.com">Kingman, AZ</a></li>
+        <li><a href="https://suncityepoxyflooring.com">Sun City, AZ</a></li>
+        <li><a href="https://anthemepoxyflooring.com">Anthem, AZ</a></li>
+        <li><a href="https://desertridgeepoxy.com">Desert Ridge, AZ</a></li>
+        <li><a href="http://phoenixazepoxycontractor.com/">Phoenix, AZ (Epoxy Contractor)</a></li>
       </ul>
+      <div class="epoxy-grid">
+        <article class="epoxy-card">
+          <h3><a href="https://apachejunctionepoxy.com/">Apache Junction, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://apachejunctionepoxy.com/">Apache Junction Epoxy Flooring</a></p>
+          <p>Apache Junction Epoxy Flooring coats concrete for homeowners and businesses at the foot of the Superstition Mountains. The company&#x27;s work centers on garage floors, where it installs decorative flake, metallic epoxy and solid color systems finished with polyaspartic or polyurea topcoats. It also handles patios, interior residential floors, commercial spaces and warehouse or industrial slabs, along with the concrete prep and repair those jobs need.</p>
+          <p>According to its website, every floor is prepared by diamond grinding rather than acid etching, which gives the coating a clean, open surface to bond to. Garage installs with a polyaspartic topcoat can often be finished in a single day, and the topcoats are UV-stable so they hold their color in the Arizona sun. The company says its own crew does the work, and that a residential garage floor commonly lasts 10 to 20 years.</p>
+          <p>Estimates are free, and the company aims to respond within one business day. Beyond Apache Junction, it serves Gold Canyon, Mesa, Queen Creek, San Tan Valley, Gilbert, Chandler and Florence, covering much of the East Valley and Pinal County. If your garage slab is stained, dusty or cracked, this is a local place to start for a floor that is easier to clean.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://elmirageepoxy.com/">El Mirage, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://elmirageepoxy.com/">El Mirage Epoxy</a></p>
+          <p>El Mirage Epoxy installs floor coatings for homes and businesses in El Mirage and across the West Valley. Its service list covers garage floor coatings, residential epoxy flooring, decorative flake, metallic epoxy, polyaspartic and polyurea systems, patio and concrete coatings, commercial epoxy flooring and warehouse floors, so one contractor can take on anything from a two-car garage to a working shop floor.</p>
+          <p>The company&#x27;s website puts the emphasis on preparation. Slabs are diamond-ground before any coating goes down, cracks and spalled areas are repaired first, and the concrete is checked for moisture. Those steps matter because most coating failures trace back to a floor that was not properly prepared, and moisture rising through a slab can lift even a good product.</p>
+          <p>Estimates are free, and the listed hours run Monday through Saturday, 7 AM to 6 PM. In addition to El Mirage, the service area includes Surprise, Sun City, Sun City West, Youngtown, Peoria, Glendale, Waddell, Litchfield Park, Goodyear and Avondale. For West Valley homeowners who want a garage that sweeps clean, resists oil and tire marks and looks finished rather than bare, El Mirage Epoxy offers a full range of systems and a prep-first approach to installing them.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringqueencreekaz.com/">Queen Creek, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringqueencreekaz.com/">Queen Creek Epoxy Flooring</a></p>
+          <p>Queen Creek Epoxy Flooring serves one of the fastest-growing corners of the East Valley, where new garages, workshops and patios leave plenty of bare concrete waiting for a finish. The company offers nine floor systems in all. On the residential side that means garage floor coatings, interior epoxy floors, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, and patio and concrete coatings. For businesses it installs commercial epoxy flooring and warehouse floors.</p>
+          <p>Its website describes a seven-step install process, which reflects how much of a coating job happens before the color goes down. Surface preparation, repairs, a base coat, broadcast flake or pigment and a protective topcoat each play a part in how long the floor lasts and how it looks under daily use.</p>
+          <p>Flake floors are a popular garage choice because the speckled pattern hides dust and adds light texture underfoot, while metallic epoxy gives a glossy, swirled look suited to showrooms and living spaces. Polyaspartic and polyurea topcoats cure quickly and stand up to hot tires.</p>
+          <p>Estimates are free. Along with Queen Creek, the company lists San Tan Valley, Gilbert, Mesa, Chandler, Apache Junction, Florence and Gold Canyon as cities it serves, making it a convenient option across the southeast Valley.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://fountainhillsepoxy.com/">Fountain Hills, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://fountainhillsepoxy.com/">Fountain Hills Epoxy Flooring</a></p>
+          <p>Fountain Hills Epoxy Flooring works in Fountain Hills and the Northeast Valley, an area of hillside homes where a garage is often part workshop, part storage and part showroom. The company&#x27;s residential services include garage floor coatings, interior epoxy flooring and patio and concrete coatings. Its decorative options are flake and metallic epoxy, and its coating systems include polyaspartic and polyurea. For businesses, it installs commercial epoxy flooring and warehouse floor coatings.</p>
+          <p>Each finish suits a different need. Decorative flake gives a speckled, granite-like surface that hides dust and tire marks between cleanings. Metallic epoxy produces a deep, glossy floor with movement in the color, and it tends to be chosen for spaces meant to impress. Polyaspartic and polyurea are fast-curing coatings valued for toughness and resistance to sunlight, which is useful on patios and in garages that face the afternoon sun.</p>
+          <p>Estimates are free, and the listed hours are Monday through Saturday, 7 AM to 6 PM. The service area takes in Scottsdale, North Scottsdale, Rio Verde, Tonto Verde, Fort McDowell, Paradise Valley, Mesa and Cave Creek as well as Fountain Hills itself. Homeowners who want a clean, sealed floor in place of bare gray concrete can start with a visit to the company&#x27;s website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://paradisevalleyepoxy.com/">Paradise Valley, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://paradisevalleyepoxy.com/">Paradise Valley Epoxy Flooring</a></p>
+          <p>Paradise Valley Epoxy Flooring installs coated concrete floors in Paradise Valley and the neighborhoods around it. Its services cover garage floor coatings, residential epoxy flooring, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy flooring and warehouse floor coatings.</p>
+          <p>In a town known for large homes and multi-car garages, the floor is often the last unfinished surface. A coated slab changes that. It seals the concrete against oil, dust and stains, brightens the room by reflecting light, and wipes clean with far less effort than bare concrete. Metallic epoxy suits collectors&#x27; garages and interior rooms where the floor is part of the design, while flake systems give a practical, slip-conscious texture for everyday parking and storage. Patio coatings carry the same finished look outdoors.</p>
+          <p>The company offers free estimates and free floor visits, so the slab can be seen in person before a system is recommended. Listed hours are Monday to Saturday, 7 AM to 6 PM.</p>
+          <p>Besides Paradise Valley, the service area includes Scottsdale, North Scottsdale, Arcadia, the Biltmore area, Phoenix, Tempe, Fountain Hills and Cave Creek. Residents and business owners in those areas can use the company&#x27;s website to see the available finishes and request a visit.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringtempeaz.com/">Tempe, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringtempeaz.com/">Tempe Epoxy Flooring</a></p>
+          <p>Tempe Epoxy Flooring has its office on West 1st Street in Tempe and serves homes and businesses across the central Valley. Its residential work includes garage floor coatings, interior epoxy flooring and patio and concrete coatings. Its commercial work covers epoxy flooring for business spaces and warehouse floor coatings.</p>
+          <p>Customers can choose from four finishes listed on the company&#x27;s website: solid color, decorative flake, metallic and quartz. Solid color gives a clean, uniform look for utility spaces. Flake adds a speckled pattern that hides dust. Metallic creates a glossy, flowing surface, and quartz builds a textured, hard-wearing floor often used where grip matters. Polyaspartic and polyurea systems are available alongside traditional epoxy.</p>
+          <p>The company says most residential installations take two to three days, and that a floor can give 20 years of service with proper care. Estimates are free and done on site for both homes and businesses, which lets the installer check the slab&#x27;s condition before quoting.</p>
+          <p>The service area includes Tempe, Phoenix, Mesa, Chandler, Gilbert, Scottsdale, Glendale and greater Maricopa County. With a mix of older homes, rentals, shops and light industrial buildings in Tempe, a contractor that handles both residential and commercial floors is a practical fit for the city.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringchandleraz.com">Chandler, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringchandleraz.com">Chandler Epoxy Flooring</a></p>
+          <p>Chandler Epoxy Flooring is an epoxy flooring contractor with an office on South Arizona Avenue in Chandler. It installs garage floor coatings, residential epoxy flooring, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy flooring and warehouse floor coatings.</p>
+          <p>For most homeowners the garage is the starting point. Bare concrete sheds dust, soaks up oil and shows every stain, and a coated floor solves all three problems at once. A flake system finished with a clear topcoat is the common choice for parking and storage, since the pattern disguises dirt and the surface cleans up with a broom or a mop. Metallic epoxy is the more decorative route, with a smooth, glossy finish that works in game rooms, home gyms and retail spaces. On patios, a coating adds color and protection to concrete that takes full sun.</p>
+          <p>Chandler&#x27;s business parks and warehouses have different demands, and the company&#x27;s commercial and warehouse coatings are intended for floors that see carts, forklifts and constant foot traffic.</p>
+          <p>On-site estimates are free. Hours are Monday through Saturday, 7 AM to 6 PM, closed Sunday. The company serves Chandler along with Gilbert, Mesa, Tempe, Sun Lakes, Queen Creek and Ahwatukee.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://glendaleepoxyflooringguys.com">Glendale, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://glendaleepoxyflooringguys.com">Glendale Epoxy Flooring Guys</a></p>
+          <p>Glendale Epoxy Flooring Guys is based in Glendale and works throughout the West Valley. The company installs garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>A coated garage floor is one of the more noticeable upgrades a homeowner can make for the cost. It turns a dusty slab into a sealed surface that resists oil, road grime and hot tire pickup, and it makes the whole space brighter. Flake floors give a speckled finish with some texture underfoot. Metallic floors are smoother and more dramatic. Polyaspartic and polyurea coatings cure faster than traditional epoxy and hold up well against sunlight, which helps in garages that sit open during the day.</p>
+          <p>The same systems scale up for commercial use. Shops, showrooms and warehouses benefit from floors that are easy to clean and tough enough for steady traffic.</p>
+          <p>Estimates are free and come with no obligation, so homeowners can compare options and prices before deciding. Along with Glendale, the company serves Peoria and other West Valley communities, including Surprise, Sun City and Avondale. Its website shows the available floor types and is the place to request a quote for a home or business.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringsurprise.com">Surprise, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringsurprise.com">Epoxy Flooring Surprise AZ</a></p>
+          <p>Epoxy Flooring Surprise AZ serves Surprise and the Northwest Valley with nine floor coating systems. They cover garages, interior residential rooms, decorative flake, metallic epoxy, polyaspartic, polyurea, patios and other concrete, commercial spaces and warehouses.</p>
+          <p>The company&#x27;s website describes a careful, documented way of working. It starts with a free on-site measure, followed by a written scope that breaks the job down line by line. Slabs are moisture-tested, because vapor moving up through concrete is a common cause of coatings lifting. The surface is then prepared by diamond grinding, which opens the concrete so the coating can grip. When the job is finished, the customer receives a cure card explaining when the floor can be walked on, loaded and driven on.</p>
+          <p>That kind of process helps homeowners know what they are paying for and what to expect at each stage. It also suits the area, where many homes are fairly new and garages double as workshops, golf cart parking and storage.</p>
+          <p>Flake floors remain the practical favorite for garages, while metallic epoxy offers a polished, custom look for interior spaces. Polyaspartic and polyurea topcoats add fast curing and durability. Surprise residents can review the systems and request a measure through the company&#x27;s website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://avondaleepoxyflooring.com/">Avondale, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://avondaleepoxyflooring.com/">Epoxy Flooring Avondale AZ</a></p>
+          <p>Epoxy Flooring Avondale AZ provides residential and commercial floor coatings in Avondale and neighboring West Valley communities. Its systems include garage floor coatings, warehouse coatings, patio and concrete coatings, decorative flake, metallic epoxy, polyaspartic and polyurea.</p>
+          <p>The southwest Valley has grown quickly, and with that growth has come a great deal of new concrete in garages, patios, shops and distribution buildings. Bare slabs are porous. They absorb oil and spills, shed fine dust and wear unevenly under traffic. A coating seals the surface and gives it a finish that is easier to maintain. For a home garage, a flake system offers good looks and hides everyday dirt. For a warehouse, a heavier-duty coating gives a cleanable surface that stands up to pallet jacks and forklifts. Polyaspartic and polyurea products cure quickly, which shortens the time a space is out of use.</p>
+          <p>Estimates are free, and the company says it usually responds within one business day.</p>
+          <p>Its service area includes Avondale, Goodyear, Tolleson, Litchfield Park and Buckeye, and extends to Cashion, Laveen, West Phoenix, Glendale and Surprise. Homeowners and business owners in those communities can see the available floor options on the company&#x27;s website and ask for a quote on their own project.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringscottsdaleaz.com">Scottsdale, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringscottsdaleaz.com">Epoxy Flooring Scottsdale AZ</a></p>
+          <p>Epoxy Flooring Scottsdale AZ installs coated floors for homes and businesses in Scottsdale. Its services are garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>The company&#x27;s website sets out several working practices. Slabs are tested for moisture before a quote is given, so the recommended system fits the concrete&#x27;s actual condition. Every job gets diamond-ground prep. Quotes are itemized, which makes it clear what each part of the job costs. Clear coats are sun-stable, an important detail in a city with intense sunlight for much of the year, since some coatings yellow when exposed to UV. Most residential garages take one to two days on site.</p>
+          <p>Scottsdale garages often hold more than daily drivers, and a finished floor completes the space in a way bare concrete cannot. Metallic epoxy is a frequent choice for display garages and interior rooms. Flake floors suit hard everyday use. Patio coatings bring color and protection to outdoor concrete.</p>
+          <p>Quotes are free and described as no-pressure. The listed service areas include Old Town, Kierland, DC Ranch, Paradise Valley, Fountain Hills and Cave Creek. The company&#x27;s website has details on each floor type and a way to request a quote.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://mesaepoxyflooringpros.com">Mesa, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://mesaepoxyflooringpros.com">Mesa Epoxy Flooring Pros</a></p>
+          <p>Mesa Epoxy Flooring Pros is based on North Val Vista Drive in Mesa and serves the city and the wider East Valley. The company describes itself as locally owned, licensed and insured, and it backs its work with a written warranty.</p>
+          <p>Its services include garage floor coatings, residential epoxy flooring, decorative flake flooring, metallic epoxy flooring, polyaspartic and polyurea floor coatings, patio and concrete coatings, commercial epoxy flooring and warehouse floor coatings. That range covers nearly any concrete surface a home or business might want finished.</p>
+          <p>Mesa has a wide mix of properties, from older ranch homes with well-used garages to newer subdivisions, RV garages, small shops and industrial buildings near the airports. Each puts different demands on a floor. A home garage needs resistance to hot tires, oil and dropped tools. A patio needs a coating that tolerates sun. A commercial kitchen, showroom or warehouse needs a surface that can be cleaned quickly and will not break down under constant traffic.</p>
+          <p>Estimates are free and done on site, so the installer can look at cracks, stains and previous coatings before recommending a system. In addition to Mesa, the company serves Gilbert, Chandler, Tempe, Queen Creek, Scottsdale and other nearby communities. Details and a quote request form are on its website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringmaricopa.com">Maricopa, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringmaricopa.com">Maricopa Epoxy Flooring Pros</a></p>
+          <p>Maricopa Epoxy Flooring Pros serves the city of Maricopa and nearby Pinal County communities. The company installs garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>According to its website, every floor is diamond-ground before coating. Grinding removes weak surface concrete, old sealers and contaminants, and it leaves a profile the coating can lock into. The company provides written, itemized quotes and a written warranty, and estimates are free and done on site.</p>
+          <p>For garages, a typical installation with a polyaspartic system takes one day. That speed is one of the main reasons polyaspartic has become popular. It cures quickly, resists UV light and handles the heat that builds up in an Arizona garage during summer.</p>
+          <p>Maricopa is largely a city of newer homes, and many owners coat the garage soon after moving in, before the slab has had time to collect oil stains. Flake floors are the usual pick for that purpose, with metallic epoxy available for anyone who wants a more decorative finish.</p>
+          <p>The service area covers Maricopa&#x27;s 85138 and 85139 ZIP codes, plus Stanfield, Hidden Valley, Thunderbird Farms, Mobile, Ak-Chin and north Casa Grande. The website has more on each system.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://phoenixepoxyflooringpros.com">Phoenix, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://phoenixepoxyflooringpros.com">Phoenix Epoxy Flooring Pros</a></p>
+          <p>Phoenix Epoxy Flooring Pros serves Phoenix and the surrounding Valley. The company states that it is licensed and insured, and it provides a written workmanship warranty with its installations.</p>
+          <p>The service list includes garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings. Installations typically take one to two days, and the company&#x27;s website gives 10 to 20 years as the typical lifespan of a professionally installed system.</p>
+          <p>Phoenix heat is hard on floors. Garage slabs get very hot in summer, and tires fresh off the road can soften and pull up weak coatings, a problem often seen with do-it-yourself kits. Professional systems are built to resist that. The company uses UV-stable topcoats, which keep their clarity and color in strong sunlight instead of turning yellow.</p>
+          <p>A coated floor also makes a garage more usable. It stops concrete dusting, resists oil and chemicals and reflects more light into the room. In commercial settings, the same properties make cleaning faster.</p>
+          <p>Estimates are free, done on site and carry no obligation. Besides Phoenix, the company serves Scottsdale, Tempe, Mesa, Chandler, Gilbert, Glendale and Peoria. More information and a quote request are available on its website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://goldcanyonepoxyflooring.com">Gold Canyon, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://goldcanyonepoxyflooring.com">Gold Canyon Epoxy Flooring</a></p>
+          <p>Gold Canyon Epoxy Flooring is based in Gold Canyon, at the edge of the Superstition Mountains, and works across the far East Valley. Its services include garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>The company&#x27;s website lists the practices it follows on each job. Floors are prepared by diamond grinding. Topcoats are UV-stable. Quotes are written and broken down line by line, and work comes with a written warranty. One-day garage systems are available for homeowners who do not want the garage out of use for long.</p>
+          <p>Estimates and floor visits are free. Seeing the slab in person lets the installer check for cracks, moisture and earlier coatings, all of which affect which system will perform best.</p>
+          <p>Gold Canyon has many golf course homes, seasonal residents and garages that hold golf carts and off-road vehicles alongside cars. A flake floor handles that kind of use well and hides the dust that desert living brings. Patio coatings extend the finished look outdoors.</p>
+          <p>The service area includes Apache Junction, Queen Valley, San Tan Valley, East Mesa, Queen Creek, Florence, Superior, Gilbert, Mesa and the Superstition Foothills. The company&#x27;s website has the details.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://peoriaepoxyflooringpros.com">Peoria, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://peoriaepoxyflooringpros.com">Peoria Epoxy Flooring Pros</a></p>
+          <p>Peoria Epoxy Flooring Pros serves Peoria and the West Valley with garage floor coatings, residential epoxy, decorative flake, metallic, polyaspartic and polyurea systems, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>The company&#x27;s website says its own crew performs the work. Each job includes moisture testing and diamond grinding, two steps that address the most common reasons a coating fails. Moisture testing shows whether vapor is moving through the slab. Grinding removes the weak top layer of concrete and gives the coating a surface to bond with.</p>
+          <p>Most homes are finished in two to three days, and the company puts the typical lifespan of a properly prepared and maintained floor at 20 years. Estimates are free, done on site and come with a written quote.</p>
+          <p>Peoria stretches from older neighborhoods near Old Town to newer communities in the north, and the company lists many of them by name, including Vistancia, Westwing, Fletcher Heights and the Lake Pleasant area. It also serves Glendale, Sun City, Sun City West, Surprise, El Mirage and Phoenix.</p>
+          <p>Whether the project is a standard two-car garage, an RV bay, a back patio or a commercial floor, the company&#x27;s website explains the options and offers a way to schedule an estimate.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://gilbertepoxyflooringpros.com">Gilbert, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://gilbertepoxyflooringpros.com">Gilbert Epoxy Flooring Pros</a></p>
+          <p>Gilbert Epoxy Flooring Pros is an owner-operated company serving Gilbert and the East Valley. It installs garage, residential, decorative flake, metallic epoxy, polyaspartic, polyurea, patio and concrete, commercial and warehouse floor coatings.</p>
+          <p>Clear pricing is a theme on the company&#x27;s website. Estimates are free and done on site, quotes are written and itemized, and the company states there are no surprise charges after the quote. For a homeowner comparing bids, an itemized quote makes it easier to see exactly what preparation, materials and topcoats are included.</p>
+          <p>On the technical side, floors are prepared by diamond grinding, and topcoats are UV-stable so they keep their appearance in sunlight. A typical garage installation takes one day, which keeps disruption to a minimum for busy households.</p>
+          <p>Gilbert is a family-oriented town with a lot of garage activity, from bikes and sports gear to home gyms and workshops. A coated floor stands up to that traffic, resists stains and cleans up quickly. Flake finishes are the common choice for garages, while metallic epoxy gives a more decorative result for interior rooms or showpiece spaces.</p>
+          <p>The company also serves Chandler, Mesa, Queen Creek and San Tan Valley. Its website shows the available systems and includes a way to request an on-site estimate.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringsantanvalleyaz.com">San Tan Valley, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringsantanvalleyaz.com">Epoxy Flooring Santan Valley</a></p>
+          <p>Epoxy Flooring Santan Valley serves San Tan Valley and surrounding communities in Pinal County and the southeast Valley. Its services include garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>According to the company&#x27;s website, the process begins with a free on-site visit and estimate, followed by a written quote that lists each item. Floors are prepared by diamond grinding, and topcoats are UV-stable. Most garages are finished in one day.</p>
+          <p>San Tan Valley is made up largely of newer subdivisions, and many homes there have garages with bare builder-grade concrete. Coating that slab early protects it from oil and stains, stops the fine dust that bare concrete gives off and makes the garage feel like a finished part of the house. A flake floor is the practical standard. Metallic epoxy is available for a more custom look, and patio coatings give outdoor slabs color and protection from the sun.</p>
+          <p>In addition to San Tan Valley, the company lists Queen Creek, Florence, Gilbert, Coolidge, Apache Junction, Chandler and Mesa among the communities it serves. Homeowners and businesses can review the floor systems on its website and arrange a visit to have their concrete assessed.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://newriverepoxyflooring.com">New River, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://newriverepoxyflooring.com">New River Epoxy Flooring</a></p>
+          <p>New River Epoxy Flooring is a locally owned company serving New River and the North Valley foothills. It works for both homeowners and businesses, installing garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>The company&#x27;s website is specific about preparation. Every floor is diamond-ground and never acid-etched. Grinding produces a consistent surface profile for the coating to bond to, while acid etching can leave residue and uneven results. The work is backed by a written warranty against peeling and delamination, the two failures that proper preparation is meant to prevent.</p>
+          <p>Estimates are written and itemized, and both estimates and floor visits are free. One-day garage systems typically allow parking again in about 24 hours.</p>
+          <p>Properties in the New River area often have large garages, detached shops and barns, with trucks, trailers, side-by-sides and equipment coming and going. A coated floor in those spaces is easier to sweep, resists fluids and stands up to heavy use.</p>
+          <p>The service area includes Desert Hills, Anthem, Cave Creek, Carefree and other foothill communities. Hours are Monday to Saturday, 7 AM to 6 PM, closed Sunday. More details are on the company&#x27;s website, along with a way to request a visit.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="http://waukeshaeliteepoxyflooring.com/">Waukesha, WI</a></h3>
+          <p class="epoxy-name"><a href="http://waukeshaeliteepoxyflooring.com/">Waukesha Elite Epoxy Flooring</a></p>
+          <p>Waukesha Elite Epoxy Flooring serves Waukesha, Wisconsin, and surrounding communities. Its services include garage floor coatings, residential epoxy flooring, commercial epoxy flooring, warehouse floor coatings, metallic epoxy flooring, decorative flake flooring, polyaspartic floor coatings, polyurea floor coatings and patio and concrete coatings.</p>
+          <p>Wisconsin winters are hard on garage floors. Cars carry in snow, slush and road salt, and the meltwater soaks into bare concrete. Over time, salt and repeated freezing and thawing can cause the surface to pit and flake. A coated floor seals the slab so that water and salt stay on top, where they can be squeegeed or rinsed out. Flake systems add texture that helps with footing when the floor is wet. Polyaspartic and polyurea coatings are valued for flexibility and for curing across a wider range of temperatures than traditional epoxy.</p>
+          <p>The company&#x27;s website says that after a site visit the customer receives a written scope of work and a firm written price, so the cost is settled before the job begins.</p>
+          <p>In addition to Waukesha, the company lists Pewaukee, Brookfield, New Berlin, Delafield, Hartland, Muskego, Sussex and Oconomowoc among the communities it serves. Homeowners and businesses in Waukesha County can view the flooring options on its website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://lakehavasucityepoxy.com">Lake Havasu City, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://lakehavasucityepoxy.com">Lake Havasu City Epoxy</a></p>
+          <p>Lake Havasu City Epoxy offers nine coating services for homes and businesses along the Colorado River. They are garage floor coatings, residential epoxy flooring, decorative flake, metallic epoxy, polyaspartic coatings, polyurea coatings, patio and pool deck coatings, commercial epoxy flooring and warehouse or industrial floor coatings.</p>
+          <p>Lake Havasu City is one of the hottest places in Arizona, and its garages work hard. Many are oversized to hold boats, personal watercraft, trailers and off-road vehicles, which means wet hulls, sand, fuel and heavy loads on the floor. A coated slab resists all of that and hoses out easily. Pool deck and patio coatings are a natural fit for a town built around outdoor living.</p>
+          <p>The company&#x27;s website notes that surfaces are prepared by diamond grinding. It also says fast-cure garage systems typically return to use in 24 to 48 hours in warm weather, so a garage is not out of service for long. Quotes are free, done on site and provided in writing.</p>
+          <p>The service area covers Lake Havasu City and nearby communities, including the Island, Havasu Foothills Estates, Desert Hills, Horizon Six, Crystal Beach, Golden Shores and Parker, with select projects in Needles, California. Full details are on the company&#x27;s website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://prescottvalleyepoxy.com">Prescott Valley, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://prescottvalleyepoxy.com">Prescott Valley Epoxy</a></p>
+          <p>Prescott Valley Epoxy is based in Prescott Valley and serves the Quad Cities area of Yavapai County. Its services are garage floor coatings, residential epoxy flooring, decorative flake flooring, metallic epoxy flooring, polyaspartic floor coatings, polyurea floor coatings, patio and concrete coatings, commercial epoxy flooring and warehouse floor coatings.</p>
+          <p>Conditions here differ from the desert cities to the south. Prescott Valley sits at a much higher elevation, with cold winter nights and occasional snow. Concrete in this climate has to cope with moisture and temperature swings, and a sealed, coated surface helps keep water out of the slab. Polyaspartic and polyurea coatings are often chosen in cooler climates because they cure reliably and remain somewhat flexible. Flake finishes add texture that helps with traction when a floor is wet from rain or snowmelt.</p>
+          <p>For homeowners, the usual project is a garage or workshop floor, with patios close behind. Businesses use commercial and warehouse coatings for floors that need to stay clean and hold up under traffic.</p>
+          <p>Estimates are free, done in person and provided in writing. The company&#x27;s service area includes Dewey-Humboldt, Prescott, Chino Valley, Mayer, Cordes Lakes and Paulden, in addition to Prescott Valley. Its website describes each service and offers a way to request an estimate.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://prescotteliteepoxyflooring.com">Prescott, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://prescotteliteepoxyflooring.com">Epoxy Flooring Prescott</a></p>
+          <p>Epoxy Flooring Prescott serves Prescott and central Yavapai County. The company installs garage floor coatings, residential epoxy flooring, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy flooring, and hangar and warehouse coatings. Its website also mentions industrial flooring solutions.</p>
+          <p>Hangar floors are an unusual item on that list and a sensible one for this area. Aircraft hangars need bright, sealed floors that resist fuel and hydraulic fluid and make leaks and dropped parts easy to spot. The same qualities serve auto shops, warehouses and industrial buildings.</p>
+          <p>For homeowners, garage coatings are the main draw. Prescott has four real seasons, and vehicles bring in rain, mud and snow. A coated floor keeps that moisture on the surface instead of in the concrete, and a flake finish offers some grip underfoot. Metallic epoxy gives a more decorative result for interior rooms, and patio coatings protect outdoor slabs.</p>
+          <p>Estimates are free and provided in writing. The service area includes Prescott Valley, Chino Valley, Williamson Valley, Groom Creek, Skull Valley, Dewey-Humboldt and Kirkland, along with Prescott itself. The company notes that commercial and hangar projects may extend further by arrangement. More information is available on its website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://bullheadcityepoxy.com">Bullhead City, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://bullheadcityepoxy.com">Bullhead City Epoxy</a></p>
+          <p>Bullhead City Epoxy provides nine coating services along the Colorado River in Mohave County. They are garage floors, residential epoxy, decorative flake, metallic epoxy, polyaspartic, polyurea, patio and concrete coatings, commercial epoxy and warehouse floors.</p>
+          <p>Bullhead City is known for extreme summer heat, and that heat shapes what a floor coating has to do. Garage slabs get hot, tires arrive hotter, and sunlight pours in whenever the door is open. Coatings with UV-resistant topcoats, such as polyaspartic, are well suited to those conditions. River life adds its own wear. Boats, trailers and watercraft bring water and sand into the garage, and a sealed floor makes cleanup simple.</p>
+          <p>Homeowners most often choose flake floors for garages because they hide dust and add texture. Metallic epoxy offers a smooth, high-gloss look, and patio coatings give outdoor concrete color and protection. For businesses, commercial and warehouse coatings create durable surfaces that are easy to keep clean.</p>
+          <p>Estimates are free and come with a written quote and no obligation. The company serves Bullhead City, Fort Mohave and Mohave Valley, and makes regular trips to Golden Valley and Kingman. Golden Shores and Needles, California, are available by arrangement. The company&#x27;s website has more about each service and how to request a quote.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://epoxyflooringkingmanaz.com">Kingman, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://epoxyflooringkingmanaz.com">Epoxy Flooring Kingman AZ</a></p>
+          <p>Epoxy Flooring Kingman AZ serves Kingman and nearby Mohave County communities. Its services include garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse floor coatings.</p>
+          <p>According to the company&#x27;s website, slabs are prepared by diamond grinding, which strips away weak surface concrete and gives the coating a sound base. One-day garage options are available for homeowners who need the space back quickly. Estimates are free and done on site, and the listed hours are Monday through Saturday, 7 AM to 6 PM.</p>
+          <p>Kingman sits on historic Route 66 in the high desert, with hot summers, cool winters and plenty of wind and dust. Many properties have large garages and shops for trucks, RVs and off-road vehicles. A coated floor keeps dust down, resists oil and fuel and makes a workspace easier to keep clean. Flake finishes are a practical choice, while metallic epoxy suits anyone who wants a showroom look. Businesses can choose commercial and warehouse coatings for heavier use.</p>
+          <p>In addition to Kingman, the service area includes Butler, Golden Valley, Valle Vista, the Hualapai Mountain area, Chloride, Dolan Springs, Hackberry and Valentine. The company&#x27;s website describes each floor system and offers a way to request an estimate.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://suncityepoxyflooring.com">Sun City, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://suncityepoxyflooring.com">Sun City Epoxy Flooring</a></p>
+          <p>Sun City Epoxy Flooring serves Sun City and neighboring Northwest Valley communities. Its services include garage floor coatings, residential epoxy, decorative flake, metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy and warehouse coatings.</p>
+          <p>Sun City is a well-established retirement community, and many of its homes have garages with decades-old concrete, often with a golf cart parked beside the car. A coating gives that older slab a fresh start. It covers stains, seals the surface and makes the floor much easier to sweep and mop. Flake systems add light texture, which helps with footing, and a brighter floor improves visibility in the garage.</p>
+          <p>Convenience matters as well. The company&#x27;s website says most garages can be installed in one day, and that fast-cure garage floors typically can be walked on after 24 hours. That means less time with belongings moved out and the car parked in the driveway.</p>
+          <p>Estimates are free, done in the home, provided in writing and carry no obligation, so there is time to consider the options without pressure.</p>
+          <p>Along with Sun City, the company serves Sun City West, Youngtown, Peoria, Surprise, El Mirage, west Glendale and the Arrowhead area. Its website lists the available finishes and explains how to arrange an estimate.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://anthemepoxyflooring.com">Anthem, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://anthemepoxyflooring.com">Anthem Epoxy Flooring</a></p>
+          <p>Anthem Epoxy Flooring serves Anthem and the north Valley foothills. It installs garage, residential, decorative flake, metallic epoxy, polyaspartic, polyurea, patio and concrete, commercial and warehouse floor coatings.</p>
+          <p>One detail on the company&#x27;s website is especially relevant to newer Arizona homes. It says its surface preparation is safe for post-tension slabs. Many homes built in recent decades sit on post-tension foundations, which contain steel cables under tension and should not be cut or drilled into carelessly. A contractor that accounts for this is paying attention to how local homes are actually built.</p>
+          <p>The company also uses UV-stable topcoats, which resist yellowing in sunlight, and says some garages can be finished in one day. Quotes are free, carry no obligation and follow an on-site estimate.</p>
+          <p>Anthem is a master-planned community with many similar garages, and a coated floor is a common upgrade there. Flake finishes hide desert dust and stand up to daily parking. Metallic epoxy creates a more striking surface for hobby garages and interior rooms, and patio coatings improve outdoor slabs.</p>
+          <p>The service area includes Anthem Parkside, Anthem Country Club, Desert Hills, New River, Tramonto and North Phoenix, Cave Creek and Black Canyon City. The company&#x27;s website has more on each option.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="https://desertridgeepoxy.com">Desert Ridge, AZ</a></h3>
+          <p class="epoxy-name"><a href="https://desertridgeepoxy.com">Desert Ridge Epoxy</a></p>
+          <p>Desert Ridge Epoxy serves Desert Ridge and north Phoenix with nine coating systems. Its services include garage floor coatings, residential epoxy flooring, decorative flake and metallic epoxy, polyaspartic and polyurea coatings, patio and concrete coatings, commercial epoxy flooring and warehouse floor coatings.</p>
+          <p>The company&#x27;s approach, as described on its website, begins with a free design consultation. That meeting is the time to settle on a color and finish, and it is followed by a written, itemized proposal. Surface preparation is entirely mechanical, meaning the concrete is ground rather than chemically etched. Certificates of insurance are available on request, which is helpful for commercial clients and for homeowners in communities with association requirements.</p>
+          <p>Desert Ridge is a master-planned area with newer homes, and its residents often treat the garage as an extension of the house. A coated floor suits that outlook. It looks finished, resists stains from vehicles and stored items and takes little effort to maintain. Metallic epoxy is an option for a more distinctive floor, and patio coatings carry the design outside.</p>
+          <p>The service area includes Aviano and Fireside, Tatum Ranch, Kierland, North Scottsdale, Paradise Valley Village, the Cave Creek Road corridor and Deer Valley. More information, including how to book a consultation, can be found on the company&#x27;s website.</p>
+        </article>
+        <article class="epoxy-card">
+          <h3><a href="http://phoenixazepoxycontractor.com/">Phoenix, AZ (Epoxy Contractor)</a></h3>
+          <p class="epoxy-name"><a href="http://phoenixazepoxycontractor.com/">Phoenix AZ Epoxy Contractor</a></p>
+          <p>Phoenix AZ Epoxy Contractor serves Phoenix and the surrounding Valley with 13 floor coating services. Its work spans garage, residential, commercial, industrial and warehouse floors. The systems on offer include epoxy, decorative flake, metallic, polyaspartic and polyurea, and the company also provides concrete prep and repair and patio coatings.</p>
+          <p>That breadth makes it an option for very different projects. A homeowner might want a flake floor in a two-car garage or a coating for a sun-baked patio. A business might need an industrial floor that tolerates forklifts, chemicals and frequent washing. Concrete repair is a useful part of the mix, since cracks, pits and worn areas need to be fixed before any coating will last.</p>
+          <p>The company&#x27;s website notes that many polyaspartic garage installations are finished in one day. Polyaspartic cures quickly and resists UV light, two qualities that suit Phoenix, where garages get very hot and sunlight is strong for most of the year.</p>
+          <p>Estimates are free. In addition to Phoenix, the company serves Scottsdale, Tempe, Mesa, Chandler, Gilbert and about ten other Valley communities listed on its site.</p>
+          <p>Anyone planning a floor project in the Phoenix area can browse the full list of services on the company&#x27;s website and request an estimate for their space.</p>
+        </article>
+      </div>
     </div>
   </section>
 
