@@ -71,12 +71,38 @@
     .medal { max-width: 220px; order: -1; justify-self: start; }
     .pick { grid-template-columns: 1fr; gap: 24px; padding: 20px; }
   }
+
+  .pin { display: grid; place-items: center; border-radius: 50%; background: #f5a300; color: #16191d; border: 2px solid #16191d;
+    font: 900 12px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; box-shadow: 0 2px 6px rgba(0,0,0,.35);
+    cursor: pointer; transition: transform .12s, background .12s, color .12s; }
+  .pin:hover, .pin-active { background: #16191d; color: #f5a300; border-color: #f5a300; transform: scale(1.12); }
+  .leaflet-container { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: #e8e4da; }
+  .leaflet-tooltip { font-size: 13px; }
+
+  .mapsec { padding: 56px 0 8px; }
+  h2.sec { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 10px; }
+  .sec-sub { color: var(--muted); max-width: 42em; margin-bottom: 28px; }
+  .mapbox { height: 520px; border-radius: 6px; overflow: hidden; border: 1px solid var(--rule);
+    box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 28px -18px rgba(0,0,0,.25); }
+  .citylist { list-style: none; columns: 4 200px; column-gap: 28px; margin-top: 32px; }
+  .citylist li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0;
+    border-bottom: 1px solid var(--rule); break-inside: avoid; }
+  .citylist a { font-weight: 700; font-size: .95rem; text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .citylist a:hover { color: var(--amber-dark); }
+  .citylist .n { flex: none; display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px;
+    background: var(--ink); color: var(--amber); font-size: .75rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  header nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: .9rem; border: 1px solid var(--amber);
+    border-radius: 4px; padding: 7px 14px; }
+  header nav a:hover { background: var(--amber); color: var(--ink); }
+  @media (max-width: 860px) { .mapbox { height: 420px; } }
 </style>
+<link rel="stylesheet" href="assets/leaflet/leaflet.css">
 </head>
 <body>
 
 <header>
-  <div class="wrap"><a class="brand" href="#top">Best Garage Door <span>Company WI</span></a></div>
+  <div class="wrap"><a class="brand" href="#top">Best Garage Door <span>Company WI</span></a><nav><a href="#map">Find by city</a></nav></div>
 </header>
 
 <div class="hero" id="top">
@@ -124,6 +150,69 @@
     <li><a href="#delafield"><b>15</b>Delafield</a></li>
   </ul></div>
 </nav>
+
+<section class="mapsec" id="map">
+  <div class="wrap">
+    <h2 class="sec">Find a Garage Door Company by City</h2>
+    <p class="sec-sub">Pick your city on the map to see every company on this list that serves it. The number on each pin is how many companies cover that city.</p>
+    <div class="mapbox" id="citymap" role="region" aria-label="Map of Wisconsin cities served"></div>
+    <ul class="citylist">
+          <li><a href="city/ashippun.html">Ashippun, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/big-bend.html">Big Bend, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/brookfield.html">Brookfield, WI</a><span class="n" title="10 companies">10</span></li>
+          <li><a href="city/butler.html">Butler, WI</a><span class="n" title="4 companies">4</span></li>
+          <li><a href="city/caledonia.html">Caledonia, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/cedarburg.html">Cedarburg, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/chenequa.html">Chenequa, WI</a><span class="n" title="4 companies">4</span></li>
+          <li><a href="city/colgate.html">Colgate, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/delafield.html">Delafield, WI</a><span class="n" title="7 companies">7</span></li>
+          <li><a href="city/dousman.html">Dousman, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/elm-grove.html">Elm Grove, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/franklin.html">Franklin, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/genesee.html">Genesee, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/germantown.html">Germantown, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/greendale.html">Greendale, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/greenfield.html">Greenfield, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/hales-corners.html">Hales Corners, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/hartland.html">Hartland, WI</a><span class="n" title="6 companies">6</span></li>
+          <li><a href="city/hubertus.html">Hubertus, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/ixonia.html">Ixonia, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/jackson.html">Jackson, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/lac-la-belle.html">Lac La Belle, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/lannon.html">Lannon, WI</a><span class="n" title="4 companies">4</span></li>
+          <li><a href="city/lisbon.html">Lisbon, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/menomonee-falls.html">Menomonee Falls, WI</a><span class="n" title="6 companies">6</span></li>
+          <li><a href="city/mequon.html">Mequon, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/merton.html">Merton, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/milwaukee.html">Milwaukee, WI</a><span class="n" title="4 companies">4</span></li>
+          <li><a href="city/mukwonago.html">Mukwonago, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/muskego.html">Muskego, WI</a><span class="n" title="4 companies">4</span></li>
+          <li><a href="city/nashotah.html">Nashotah, WI</a><span class="n" title="6 companies">6</span></li>
+          <li><a href="city/new-berlin.html">New Berlin, WI</a><span class="n" title="8 companies">8</span></li>
+          <li><a href="city/north-lake.html">North Lake, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/oak-creek.html">Oak Creek, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/oconomowoc.html">Oconomowoc, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/oconomowoc-lake.html">Oconomowoc Lake, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/okauchee.html">Okauchee, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/pewaukee.html">Pewaukee, WI</a><span class="n" title="9 companies">9</span></li>
+          <li><a href="city/raymond.html">Raymond, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/richfield.html">Richfield, WI</a><span class="n" title="2 companies">2</span></li>
+          <li><a href="city/south-milwaukee.html">South Milwaukee, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/summit.html">Summit, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/sussex.html">Sussex, WI</a><span class="n" title="6 companies">6</span></li>
+          <li><a href="city/vernon.html">Vernon, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/wales.html">Wales, WI</a><span class="n" title="5 companies">5</span></li>
+          <li><a href="city/waterford.html">Waterford, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/watertown.html">Watertown, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/waukesha.html">Waukesha, WI</a><span class="n" title="8 companies">8</span></li>
+          <li><a href="city/wauwatosa.html">Wauwatosa, WI</a><span class="n" title="6 companies">6</span></li>
+          <li><a href="city/west-allis.html">West Allis, WI</a><span class="n" title="3 companies">3</span></li>
+          <li><a href="city/west-bend.html">West Bend, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/west-milwaukee.html">West Milwaukee, WI</a><span class="n" title="1 companies">1</span></li>
+          <li><a href="city/wind-lake.html">Wind Lake, WI</a><span class="n" title="2 companies">2</span></li>
+    </ul>
+  </div>
+</section>
 
 <main>
   <div class="wrap">
@@ -558,5 +647,8 @@
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="assets/leaflet/leaflet.js"></script>
+<script src="assets/map.js"></script>
+<script>drawCityMap('citymap', [{"n": "Ashippun", "s": "ashippun", "lat": 43.2119, "lon": -88.5162, "k": 1}, {"n": "Big Bend", "s": "big-bend", "lat": 42.8814, "lon": -88.2068, "k": 3}, {"n": "Brookfield", "s": "brookfield", "lat": 43.0606, "lon": -88.1065, "k": 10}, {"n": "Butler", "s": "butler", "lat": 43.1058, "lon": -88.0695, "k": 4}, {"n": "Caledonia", "s": "caledonia", "lat": 42.8078, "lon": -87.9243, "k": 1}, {"n": "Cedarburg", "s": "cedarburg", "lat": 43.2967, "lon": -87.9876, "k": 1}, {"n": "Chenequa", "s": "chenequa", "lat": 43.1253, "lon": -88.3829, "k": 4}, {"n": "Colgate", "s": "colgate", "lat": 43.1998, "lon": -88.2406, "k": 2}, {"n": "Delafield", "s": "delafield", "lat": 43.0608, "lon": -88.4037, "k": 7}, {"n": "Dousman", "s": "dousman", "lat": 43.0142, "lon": -88.4726, "k": 2}, {"n": "Elm Grove", "s": "elm-grove", "lat": 43.0431, "lon": -88.079, "k": 5}, {"n": "Franklin", "s": "franklin", "lat": 42.8886, "lon": -88.0384, "k": 3}, {"n": "Genesee", "s": "genesee", "lat": 42.9601, "lon": -88.3745, "k": 2}, {"n": "Germantown", "s": "germantown", "lat": 43.2286, "lon": -88.1104, "k": 3}, {"n": "Greendale", "s": "greendale", "lat": 42.9406, "lon": -87.9959, "k": 2}, {"n": "Greenfield", "s": "greenfield", "lat": 42.9614, "lon": -88.0126, "k": 5}, {"n": "Hales Corners", "s": "hales-corners", "lat": 42.9375, "lon": -88.0487, "k": 5}, {"n": "Hartland", "s": "hartland", "lat": 43.105, "lon": -88.342, "k": 6}, {"n": "Hubertus", "s": "hubertus", "lat": 43.2343, "lon": -88.2311, "k": 2}, {"n": "Ixonia", "s": "ixonia", "lat": 43.1439, "lon": -88.5973, "k": 1}, {"n": "Jackson", "s": "jackson", "lat": 43.3239, "lon": -88.1668, "k": 1}, {"n": "Lac La Belle", "s": "lac-la-belle", "lat": 43.13, "lon": -88.521, "k": 1}, {"n": "Lannon", "s": "lannon", "lat": 43.1461, "lon": -88.1662, "k": 4}, {"n": "Lisbon", "s": "lisbon", "lat": 43.163, "lon": -88.245, "k": 2}, {"n": "Menomonee Falls", "s": "menomonee-falls", "lat": 43.1789, "lon": -88.1173, "k": 6}, {"n": "Mequon", "s": "mequon", "lat": 43.2156, "lon": -88.03, "k": 2}, {"n": "Merton", "s": "merton", "lat": 43.1467, "lon": -88.3068, "k": 5}, {"n": "Milwaukee", "s": "milwaukee", "lat": 43.0389, "lon": -87.9065, "k": 4}, {"n": "Mukwonago", "s": "mukwonago", "lat": 42.8667, "lon": -88.3334, "k": 2}, {"n": "Muskego", "s": "muskego", "lat": 42.9059, "lon": -88.139, "k": 4}, {"n": "Nashotah", "s": "nashotah", "lat": 43.0978, "lon": -88.4023, "k": 6}, {"n": "New Berlin", "s": "new-berlin", "lat": 42.9764, "lon": -88.1084, "k": 8}, {"n": "North Lake", "s": "north-lake", "lat": 43.1561, "lon": -88.3707, "k": 1}, {"n": "Oak Creek", "s": "oak-creek", "lat": 42.8858, "lon": -87.8631, "k": 1}, {"n": "Oconomowoc", "s": "oconomowoc", "lat": 43.1117, "lon": -88.4993, "k": 5}, {"n": "Oconomowoc Lake", "s": "oconomowoc-lake", "lat": 43.099, "lon": -88.46, "k": 1}, {"n": "Okauchee", "s": "okauchee", "lat": 43.113, "lon": -88.4323, "k": 5}, {"n": "Pewaukee", "s": "pewaukee", "lat": 43.0806, "lon": -88.2612, "k": 9}, {"n": "Raymond", "s": "raymond", "lat": 42.79, "lon": -88.02, "k": 1}, {"n": "Richfield", "s": "richfield", "lat": 43.2561, "lon": -88.194, "k": 2}, {"n": "South Milwaukee", "s": "south-milwaukee", "lat": 42.9106, "lon": -87.8606, "k": 1}, {"n": "Summit", "s": "summit", "lat": 43.07, "lon": -88.465, "k": 3}, {"n": "Sussex", "s": "sussex", "lat": 43.1339, "lon": -88.222, "k": 6}, {"n": "Vernon", "s": "vernon", "lat": 42.9, "lon": -88.27, "k": 3}, {"n": "Wales", "s": "wales", "lat": 43.0044, "lon": -88.3768, "k": 5}, {"n": "Waterford", "s": "waterford", "lat": 42.7631, "lon": -88.2143, "k": 1}, {"n": "Watertown", "s": "watertown", "lat": 43.1947, "lon": -88.729, "k": 1}, {"n": "Waukesha", "s": "waukesha", "lat": 43.0117, "lon": -88.2315, "k": 8}, {"n": "Wauwatosa", "s": "wauwatosa", "lat": 43.0495, "lon": -88.0076, "k": 6}, {"n": "West Allis", "s": "west-allis", "lat": 43.0167, "lon": -88.007, "k": 3}, {"n": "West Bend", "s": "west-bend", "lat": 43.4253, "lon": -88.1834, "k": 1}, {"n": "West Milwaukee", "s": "west-milwaukee", "lat": 43.0125, "lon": -87.9726, "k": 1}, {"n": "Wind Lake", "s": "wind-lake", "lat": 42.8295, "lon": -88.1587, "k": 2}], { base: '' });</script>
 </body>
 </html>
