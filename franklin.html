@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garage Door Companies in Franklin, WI | Best Garage Door Company in Wisconsin</title>
+<meta name="description" content="3 garage door companies serve Franklin, Wisconsin: names, contact details and websites.">
+<link rel="stylesheet" href="../assets/leaflet/leaflet.css">
+<style>
+  :root { --ink: #16191d; --steel: #232931; --line: #3d4753; --paper: #f5f2ec; --muted: #5d6772;
+    --amber: #f5a300; --amber-dark: #c98600; --rule: #ddd8cd; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.6; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  header { background: var(--ink); color: #fff; border-bottom: 3px solid var(--amber); }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 14px; padding-bottom: 14px; }
+  .brand { font-weight: 800; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; }
+  .brand span { color: var(--amber); }
+  header nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: .9rem; border: 1px solid var(--amber); border-radius: 4px; padding: 7px 14px; white-space: nowrap; }
+  header nav a:hover { background: var(--amber); color: var(--ink); }
+  .hero { background: var(--steel); color: #fff;
+    background-image: repeating-linear-gradient(180deg, transparent 0 62px, rgba(255,255,255,.035) 62px 64px); }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding-top: 48px; padding-bottom: 48px; }
+  .crumbs { font-size: .85rem; color: #aab3bd; margin-bottom: 14px; }
+  .crumbs a { color: #fff; text-decoration-color: var(--amber); text-underline-offset: 3px; }
+  .eyebrow { color: var(--amber); font-weight: 700; font-size: .82rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.05; font-weight: 900; text-transform: uppercase; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--amber); }
+  .lead { margin-top: 18px; color: #cfd5dc; font-size: 1.05rem; max-width: 34em; }
+  .count { display: inline-flex; align-items: baseline; gap: 10px; margin-top: 22px; }
+  .count b { font-size: 3rem; font-weight: 900; color: var(--amber); line-height: 1; font-variant-numeric: tabular-nums; }
+  .count span { color: #cfd5dc; font-weight: 600; }
+  .minimap { height: 320px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  main { padding: 48px 0 64px; }
+  h2.sec { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+  .list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+  .co { background: #fff; border-radius: 6px; border-top: 5px solid var(--amber); overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 28px -18px rgba(0,0,0,.25); display: flex; flex-direction: column; }
+  .photo { position: relative; aspect-ratio: 16 / 9; background: var(--steel); overflow: hidden; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .door { position: absolute; inset: 16% 18% 0; display: grid; gap: 4px; }
+  .door i { background: linear-gradient(180deg, #e9e5dc, #d3cec2); border-radius: 2px; box-shadow: inset 0 0 0 7px #e9e5dc, inset 0 0 0 9px rgba(0,0,0,.1); }
+  .num { position: absolute; top: 0; left: 14px; background: var(--amber); color: var(--ink); font-weight: 900; font-size: 1.15rem; line-height: 1;
+    padding: 10px 9px 16px; font-variant-numeric: tabular-nums; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+  .tag { position: absolute; right: 12px; bottom: 12px; background: var(--ink); color: var(--amber); font-size: .72rem; font-weight: 800;
+    letter-spacing: .08em; text-transform: uppercase; padding: 5px 9px; border-radius: 3px; }
+  .co-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .co h3 { font-size: 1.25rem; line-height: 1.2; font-weight: 900; }
+  .co h3 a { text-decoration: none; }
+  .co h3 a:hover { text-decoration: underline; text-decoration-color: var(--amber); }
+  .based { color: var(--muted); font-size: .9rem; margin-top: 2px; }
+  .nap { margin: 14px 0 18px; font-size: .92rem; }
+  .nap div { display: grid; grid-template-columns: 72px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+  .nap dt { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .nap dd { font-weight: 600; overflow-wrap: anywhere; }
+  .nap a { text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .btns { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn { display: block; text-align: center; font-weight: 800; text-decoration: none; padding: 11px 12px; border-radius: 4px; font-size: .92rem;
+    transition: background .15s, color .15s; }
+  .btn.dark { background: var(--ink); color: #fff; } .btn.dark:hover { background: var(--amber); color: var(--ink); }
+  .btn.line { border: 2px solid var(--ink); } .btn.line:hover { background: var(--ink); color: #fff; }
+  .nearby { margin-top: 56px; }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: .9rem; background: #fff;
+    border: 1px solid var(--rule); border-radius: 999px; padding: 6px 8px 6px 14px; transition: border-color .15s; }
+  .chips a:hover { border-color: var(--amber); }
+  .chips small { display: grid; place-items: center; min-width: 22px; height: 22px; border-radius: 11px; background: var(--ink); color: var(--amber);
+    font-size: .72rem; font-weight: 800; }
+  .note { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; max-width: 60em; }
+  footer { background: var(--ink); color: #8d97a2; padding: 28px 0; font-size: .88rem; text-align: center; }
+  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; padding-top: 32px; } .minimap { height: 260px; } .btns { grid-template-columns: 1fr; } }
+
+  .pin { display: grid; place-items: center; border-radius: 50%; background: #f5a300; color: #16191d; border: 2px solid #16191d;
+    font: 900 12px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; box-shadow: 0 2px 6px rgba(0,0,0,.35);
+    cursor: pointer; transition: transform .12s, background .12s, color .12s; }
+  .pin:hover, .pin-active { background: #16191d; color: #f5a300; border-color: #f5a300; transform: scale(1.12); }
+  .leaflet-container { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: #e8e4da; }
+  .leaflet-tooltip { font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><a class="brand" href="../index.html">Best Garage Door <span>Company WI</span></a><nav><a href="../index.html#map">All cities</a></nav></div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="crumbs"><a href="../index.html">Home</a> › <a href="../index.html#map">Cities</a> › Franklin</p>
+      <p class="eyebrow">Garage door repair &amp; installation</p>
+      <h1>Garage Door Companies in <em>Franklin</em>, WI</h1>
+      <p class="count"><b>3</b><span>companies on our list serve Franklin</span></p>
+      <p class="lead">Each company below names Franklin in the service area on its own website. Companies based in Franklin are listed first, then the rest by distance.</p>
+    </div>
+    <div class="minimap" id="minimap" role="region" aria-label="Map of Franklin and where these companies are based"></div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <h2 class="sec">Who serves Franklin</h2>
+    <div class="list">
+      <article class="co">
+        <div class="photo"><div class="door" aria-hidden="true"><i></i><i></i><i></i><i></i></div><img src="https://garagedoorsfranklinwi.com/assets/img/hero-home-900.webp" alt="Garage door, Franklin, Wisconsin" loading="lazy" onerror="this.remove()"><span class="num">01</span><span class="tag">Local</span></div>
+        <div class="co-body">
+          <h3><a href="https://garagedoorsfranklinwi.com">Garage Doors Franklin WI</a></h3>
+          <p class="based">Based in Franklin</p>
+          <dl class="nap">
+            <div><dt>Name</dt><dd>Garage Doors Franklin WI</dd></div>
+            <div><dt>Location</dt><dd>Franklin, WI</dd></div>
+            <div><dt>Website</dt><dd><a href="https://garagedoorsfranklinwi.com">garagedoorsfranklinwi.com</a></dd></div>
+          </dl>
+          <div class="btns"><a class="btn dark" href="https://garagedoorsfranklinwi.com">Visit website</a><a class="btn line" href="../index.html#franklin">Full profile</a></div>
+        </div>
+      </article>
+      <article class="co">
+        <div class="photo"><div class="door" aria-hidden="true"><i></i><i></i><i></i><i></i></div><img src="https://muskegogaragedoorpros.com/images/muskego-garage-door-hero.webp" alt="Garage door, Muskego, Wisconsin" loading="lazy" onerror="this.remove()"><span class="num">02</span></div>
+        <div class="co-body">
+          <h3><a href="https://muskegogaragedoorpros.com">Muskego Garage Door Pros</a></h3>
+          <p class="based">Based in Muskego · about 5 mi away</p>
+          <dl class="nap">
+            <div><dt>Name</dt><dd>Muskego Garage Door Pros</dd></div>
+            <div><dt>Location</dt><dd>Muskego, WI 53150</dd></div>
+            <div><dt>Website</dt><dd><a href="https://muskegogaragedoorpros.com">muskegogaragedoorpros.com</a></dd></div>
+          </dl>
+          <div class="btns"><a class="btn dark" href="https://muskegogaragedoorpros.com">Visit website</a><a class="btn line" href="../index.html#muskego">Full profile</a></div>
+        </div>
+      </article>
+      <article class="co">
+        <div class="photo"><div class="door" aria-hidden="true"><i></i><i></i><i></i><i></i></div><img src="https://newberlingaragedoors.com/assets/img/new-berlin-garage-door-hero.jpg" alt="Garage door, New Berlin, Wisconsin" loading="lazy" onerror="this.remove()"><span class="num">03</span></div>
+        <div class="co-body">
+          <h3><a href="https://newberlingaragedoors.com">New Berlin Garage Doors</a></h3>
+          <p class="based">Based in New Berlin · about 7 mi away</p>
+          <dl class="nap">
+            <div><dt>Name</dt><dd>New Berlin Garage Doors</dd></div>
+            <div><dt>Location</dt><dd>New Berlin, WI 53151</dd></div>
+            <div><dt>Website</dt><dd><a href="https://newberlingaragedoors.com">newberlingaragedoors.com</a></dd></div>
+          </dl>
+          <div class="btns"><a class="btn dark" href="https://newberlingaragedoors.com">Visit website</a><a class="btn line" href="../index.html#new-berlin">Full profile</a></div>
+        </div>
+      </article>
+    </div>
+
+    <section class="nearby">
+      <h2 class="sec">Nearby cities</h2>
+      <ul class="chips">
+      <li><a href="hales-corners.html">Hales Corners<small>5</small></a></li>
+      <li><a href="greendale.html">Greendale<small>2</small></a></li>
+      <li><a href="greenfield.html">Greenfield<small>5</small></a></li>
+      <li><a href="muskego.html">Muskego<small>4</small></a></li>
+      <li><a href="raymond.html">Raymond<small>1</small></a></li>
+      <li><a href="new-berlin.html">New Berlin<small>8</small></a></li>
+      <li><a href="wind-lake.html">Wind Lake<small>2</small></a></li>
+      <li><a href="caledonia.html">Caledonia<small>1</small></a></li>
+      <li><a href="big-bend.html">Big Bend<small>3</small></a></li>
+      <li><a href="oak-creek.html">Oak Creek<small>1</small></a></li>
+      </ul>
+    </section>
+
+    <p class="note">Service areas, names and contact details come from each company's own website. Contact the company to confirm it covers your address.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="yr">2026</span> Best Garage Door Company WI</div>
+</footer>
+
+<script src="../assets/leaflet/leaflet.js"></script>
+<script src="../assets/map.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+drawCityMap('minimap', [{"n": "Franklin", "s": "franklin", "lat": 42.8886, "lon": -88.0384, "k": 3}], { base: '../', active: 'franklin', extra: [{"lat": 42.90585, "lon": -88.13898, "label": "Muskego Garage Door Pros"}, {"lat": 42.9764, "lon": -88.10842, "label": "New Berlin Garage Doors"}], to: {"lat": 42.8886, "lon": -88.0384} });
+</script>
+</body>
+</html>
