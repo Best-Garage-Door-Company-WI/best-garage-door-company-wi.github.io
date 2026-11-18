@@ -22,7 +22,7 @@
                                          zIndexOffset: active ? 1000 : c.k * 10 }).addTo(map);
       m.bindTooltip('<b>' + c.n + ', WI</b><br>' + c.k + (c.k === 1 ? ' company' : ' companies'),
                     { direction: 'top', offset: [0, -14], permanent: active });
-      m.on('click', function () { window.location.href = opts.base + 'city/' + c.s + '.html'; });
+      m.on('click', function () { window.location.href = opts.base + c.s + '.html'; });
       pts.push([c.lat, c.lon]);
     });
     (opts.extra || []).forEach(function (p) {
