@@ -75,10 +75,20 @@
   .pin { display: grid; place-items: center; border-radius: 50%; background: #f5a300; color: #16191d; border: 2px solid #16191d;
     font: 900 12px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; box-shadow: 0 2px 6px rgba(0,0,0,.35);
     cursor: pointer; transition: transform .12s, background .12s, color .12s; }
-  .pin:hover, .pin-active { background: #16191d; color: #f5a300; border-color: #f5a300; transform: scale(1.12); }
+  .pin:hover { background: #16191d; color: #f5a300; border-color: #f5a300; transform: scale(1.12); }
   .leaflet-container { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: #e8e4da; }
   .leaflet-tooltip { font-size: 13px; }
-
+  .leaflet-popup-content-wrapper { border-radius: 6px; border-top: 4px solid var(--amber); }
+  .leaflet-popup-content { margin: 14px 16px; }
+  .pp-city { font-weight: 900; font-size: 1.05rem; text-transform: uppercase; margin: 0 !important; }
+  .pp-count { color: var(--muted); font-size: .82rem; margin: 2px 0 10px !important; }
+  .pp ol { margin: 0; padding: 0; list-style: none; counter-reset: pp; max-height: 260px; overflow-y: auto; }
+  .pp li { counter-increment: pp; display: grid; grid-template-columns: 22px 1fr; column-gap: 8px; padding: 7px 0; border-top: 1px solid var(--rule); }
+  .pp li::before { content: counter(pp); grid-row: span 2; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--ink); color: var(--amber); font-size: .7rem; font-weight: 800; }
+  .pp-name { font-weight: 700; font-size: .9rem; color: var(--ink) !important; text-decoration-color: var(--amber); text-underline-offset: 2px; }
+  .pp-meta { font-size: .78rem; color: var(--muted); }
+  .pp-meta a { color: var(--ink) !important; font-weight: 700; }
   .mapsec { padding: 56px 0 8px; }
   h2.sec { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 10px; }
   .sec-sub { color: var(--muted); max-width: 42em; margin-bottom: 28px; }
@@ -87,14 +97,17 @@
   .citylist { list-style: none; columns: 4 200px; column-gap: 28px; margin-top: 32px; }
   .citylist li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0;
     border-bottom: 1px solid var(--rule); break-inside: avoid; }
-  .citylist a { font-weight: 700; font-size: .95rem; text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  .citylist a:hover { color: var(--amber-dark); }
+  .citylist button { all: unset; cursor: pointer; font-weight: 700; font-size: .95rem; text-decoration: underline;
+    text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .citylist button:hover { color: var(--amber-dark); }
+  .citylist button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
   .citylist .n { flex: none; display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px;
     background: var(--ink); color: var(--amber); font-size: .75rem; font-weight: 800; font-variant-numeric: tabular-nums; }
   header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
   header nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: .9rem; border: 1px solid var(--amber);
-    border-radius: 4px; padding: 7px 14px; }
+    border-radius: 4px; padding: 7px 14px; white-space: nowrap; }
   header nav a:hover { background: var(--amber); color: var(--ink); }
+  .pick { scroll-margin-top: 20px; }
   @media (max-width: 860px) { .mapbox { height: 420px; } }
 </style>
 <link rel="stylesheet" href="leaflet.css">
@@ -154,62 +167,62 @@
 <section class="mapsec" id="map">
   <div class="wrap">
     <h2 class="sec">Find a Garage Door Company by City</h2>
-    <p class="sec-sub">Pick your city on the map to see every company on this list that serves it. The number on each pin is how many companies cover that city.</p>
+    <p class="sec-sub">Pick your city on the map or in the list to see which companies on this page serve it. The number on each pin is how many companies cover that city.</p>
     <div class="mapbox" id="citymap" role="region" aria-label="Map of Wisconsin cities served"></div>
     <ul class="citylist">
-          <li><a href="ashippun.html">Ashippun, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="big-bend.html">Big Bend, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="brookfield.html">Brookfield, WI</a><span class="n" title="10 companies">10</span></li>
-          <li><a href="butler.html">Butler, WI</a><span class="n" title="4 companies">4</span></li>
-          <li><a href="caledonia.html">Caledonia, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="cedarburg.html">Cedarburg, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="chenequa.html">Chenequa, WI</a><span class="n" title="4 companies">4</span></li>
-          <li><a href="colgate.html">Colgate, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="delafield.html">Delafield, WI</a><span class="n" title="7 companies">7</span></li>
-          <li><a href="dousman.html">Dousman, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="elm-grove.html">Elm Grove, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="franklin.html">Franklin, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="genesee.html">Genesee, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="germantown.html">Germantown, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="greendale.html">Greendale, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="greenfield.html">Greenfield, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="hales-corners.html">Hales Corners, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="hartland.html">Hartland, WI</a><span class="n" title="6 companies">6</span></li>
-          <li><a href="hubertus.html">Hubertus, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="ixonia.html">Ixonia, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="jackson.html">Jackson, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="lac-la-belle.html">Lac La Belle, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="lannon.html">Lannon, WI</a><span class="n" title="4 companies">4</span></li>
-          <li><a href="lisbon.html">Lisbon, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="menomonee-falls.html">Menomonee Falls, WI</a><span class="n" title="6 companies">6</span></li>
-          <li><a href="mequon.html">Mequon, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="merton.html">Merton, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="milwaukee.html">Milwaukee, WI</a><span class="n" title="4 companies">4</span></li>
-          <li><a href="mukwonago.html">Mukwonago, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="muskego.html">Muskego, WI</a><span class="n" title="4 companies">4</span></li>
-          <li><a href="nashotah.html">Nashotah, WI</a><span class="n" title="6 companies">6</span></li>
-          <li><a href="new-berlin.html">New Berlin, WI</a><span class="n" title="8 companies">8</span></li>
-          <li><a href="north-lake.html">North Lake, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="oak-creek.html">Oak Creek, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="oconomowoc.html">Oconomowoc, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="oconomowoc-lake.html">Oconomowoc Lake, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="okauchee.html">Okauchee, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="pewaukee.html">Pewaukee, WI</a><span class="n" title="9 companies">9</span></li>
-          <li><a href="raymond.html">Raymond, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="richfield.html">Richfield, WI</a><span class="n" title="2 companies">2</span></li>
-          <li><a href="south-milwaukee.html">South Milwaukee, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="summit.html">Summit, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="sussex.html">Sussex, WI</a><span class="n" title="6 companies">6</span></li>
-          <li><a href="vernon.html">Vernon, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="wales.html">Wales, WI</a><span class="n" title="5 companies">5</span></li>
-          <li><a href="waterford.html">Waterford, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="watertown.html">Watertown, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="waukesha.html">Waukesha, WI</a><span class="n" title="8 companies">8</span></li>
-          <li><a href="wauwatosa.html">Wauwatosa, WI</a><span class="n" title="6 companies">6</span></li>
-          <li><a href="west-allis.html">West Allis, WI</a><span class="n" title="3 companies">3</span></li>
-          <li><a href="west-bend.html">West Bend, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="west-milwaukee.html">West Milwaukee, WI</a><span class="n" title="1 companies">1</span></li>
-          <li><a href="wind-lake.html">Wind Lake, WI</a><span class="n" title="2 companies">2</span></li>
+      <li><button type="button" data-city="ashippun">Ashippun, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="big-bend">Big Bend, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="brookfield">Brookfield, WI</button><span class="n">10</span></li>
+      <li><button type="button" data-city="butler">Butler, WI</button><span class="n">4</span></li>
+      <li><button type="button" data-city="caledonia">Caledonia, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="cedarburg">Cedarburg, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="chenequa">Chenequa, WI</button><span class="n">4</span></li>
+      <li><button type="button" data-city="colgate">Colgate, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="delafield">Delafield, WI</button><span class="n">7</span></li>
+      <li><button type="button" data-city="dousman">Dousman, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="elm-grove">Elm Grove, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="franklin">Franklin, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="genesee">Genesee, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="germantown">Germantown, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="greendale">Greendale, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="greenfield">Greenfield, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="hales-corners">Hales Corners, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="hartland">Hartland, WI</button><span class="n">6</span></li>
+      <li><button type="button" data-city="hubertus">Hubertus, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="ixonia">Ixonia, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="jackson">Jackson, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="lac-la-belle">Lac La Belle, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="lannon">Lannon, WI</button><span class="n">4</span></li>
+      <li><button type="button" data-city="lisbon">Lisbon, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="menomonee-falls">Menomonee Falls, WI</button><span class="n">6</span></li>
+      <li><button type="button" data-city="mequon">Mequon, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="merton">Merton, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="milwaukee">Milwaukee, WI</button><span class="n">4</span></li>
+      <li><button type="button" data-city="mukwonago">Mukwonago, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="muskego">Muskego, WI</button><span class="n">4</span></li>
+      <li><button type="button" data-city="nashotah">Nashotah, WI</button><span class="n">6</span></li>
+      <li><button type="button" data-city="new-berlin">New Berlin, WI</button><span class="n">8</span></li>
+      <li><button type="button" data-city="north-lake">North Lake, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="oak-creek">Oak Creek, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="oconomowoc">Oconomowoc, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="oconomowoc-lake">Oconomowoc Lake, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="okauchee">Okauchee, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="pewaukee">Pewaukee, WI</button><span class="n">9</span></li>
+      <li><button type="button" data-city="raymond">Raymond, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="richfield">Richfield, WI</button><span class="n">2</span></li>
+      <li><button type="button" data-city="south-milwaukee">South Milwaukee, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="summit">Summit, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="sussex">Sussex, WI</button><span class="n">6</span></li>
+      <li><button type="button" data-city="vernon">Vernon, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="wales">Wales, WI</button><span class="n">5</span></li>
+      <li><button type="button" data-city="waterford">Waterford, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="watertown">Watertown, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="waukesha">Waukesha, WI</button><span class="n">8</span></li>
+      <li><button type="button" data-city="wauwatosa">Wauwatosa, WI</button><span class="n">6</span></li>
+      <li><button type="button" data-city="west-allis">West Allis, WI</button><span class="n">3</span></li>
+      <li><button type="button" data-city="west-bend">West Bend, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="west-milwaukee">West Milwaukee, WI</button><span class="n">1</span></li>
+      <li><button type="button" data-city="wind-lake">Wind Lake, WI</button><span class="n">2</span></li>
     </ul>
   </div>
 </section>
@@ -228,13 +241,13 @@
           <div><dt>Phone</dt><dd><a href="tel:+19206976055">(920) 697-6055</a></dd></div>
           <div><dt>Address</dt><dd>20111 W Bluemound Rd, Brookfield, WI 53045</dd></div>
           <div><dt>Hours</dt><dd>Mon–Sun, 6 AM–10 PM</dd></div>
-          <div><dt>Website</dt><dd><a href="https://brookfieldgaragedoor.com">brookfieldgaragedoor.com</a></dd></div>
+          <div><dt>Website</dt><dd>brookfieldgaragedoor.com</dd></div>
         </dl>
-        <a class="btn" href="https://brookfieldgaragedoor.com">Visit website</a>
+        <a class="btn" href="tel:+19206976055">Call (920) 697-6055</a>
       </div>
       <div class="body">
         <p class="city">Brookfield, Wisconsin</p>
-        <h2><a href="https://brookfieldgaragedoor.com">Brookfield Garage Door</a></h2>
+        <h2>Brookfield Garage Door</h2>
           <p>Brookfield Garage Door works from an address on West Bluemound Road and keeps some of the longest hours on this list, 6 AM to 10 PM, seven days a week. For a homeowner whose door fails before work or after dinner, that window makes a real difference.</p>
           <p>The company handles garage door repair, spring replacement, new door installation, opener repair and installation, maintenance, and cable and track repair. Its website says most repairs are completed the same day, and that it tries to reach emergency calls the same day as well. Pricing is given upfront, with a quote before any work begins, and estimates are free. Technicians service all brands, so an older opener or an unfamiliar door is not a barrier.</p>
           <p>The site also recommends an annual tune-up. In Wisconsin that is sound advice. Cold weather stiffens lubricant and makes steel springs more likely to snap, while road salt carried in on tires wears on bottom seals, cables and hardware. A yearly inspection catches frayed cables and tired rollers before they strand a car inside.</p>
@@ -255,13 +268,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>New Berlin, WI 53151</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://newberlingaragedoors.com">newberlingaragedoors.com</a></dd></div>
+          <div><dt>Website</dt><dd>newberlingaragedoors.com</dd></div>
         </dl>
-        <a class="btn" href="https://newberlingaragedoors.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">New Berlin, Wisconsin</p>
-        <h2><a href="https://newberlingaragedoors.com">New Berlin Garage Doors</a></h2>
+        <h2>New Berlin Garage Doors</h2>
           <p>New Berlin Garage Doors covers both sides of the trade, fixing doors that have stopped working and installing new ones. On the repair side, its website lists springs, cables, rollers, panels, tracks and drums, which accounts for nearly every moving part on a sectional door. On the installation side, it offers a choice of materials and styles, custom doors, and opener installation and repair.</p>
           <p>Several commitments are spelled out on the site. Most repairs get same-day service. Pricing is written and given upfront, and estimates are free. Technicians are described as licensed and insured, and work comes with a written warranty on parts and labor. The company names Clopay, Chamberlain, LiftMaster and Genie among the brands it works on, which covers a large share of the doors and openers found in local garages.</p>
           <p>New Berlin is a spread-out suburb with many two- and three-car garages, and a door there may cycle a dozen times a day. Springs are rated by cycles, so heavy use shortens their life. Knowing a repair company can replace a spring the same day is worth something when the car is trapped inside.</p>
@@ -282,13 +295,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Wauwatosa, WI</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://wauwatosagaragedoorrepair.com">wauwatosagaragedoorrepair.com</a></dd></div>
+          <div><dt>Website</dt><dd>wauwatosagaragedoorrepair.com</dd></div>
         </dl>
-        <a class="btn" href="https://wauwatosagaragedoorrepair.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Wauwatosa, Wisconsin</p>
-        <h2><a href="https://wauwatosagaragedoorrepair.com">Wauwatosa Garage Door Repair</a></h2>
+        <h2>Wauwatosa Garage Door Repair</h2>
           <p>Wauwatosa Garage Door Repair is the listing for Wauwatosa, an established suburb on Milwaukee&#x27;s western edge. Garage doors in an older community face a particular mix of problems, and a repair company focused on the city is well placed to deal with them.</p>
           <p>Much of Wauwatosa&#x27;s housing was built decades ago, and many homes have detached garages, often with single-car openings and little headroom above the door. Older doors may be heavier than modern insulated steel models, and some still run on aging openers that lack current safety features. Springs, cables and rollers in these garages have often been through many Wisconsin winters. Cold makes metal brittle, and salt and slush speed up rust on bottom brackets, tracks and hardware.</p>
           <p>The most common calls in any garage door business are broken springs, doors that have come off their tracks, frayed cables, worn rollers and openers that run without lifting the door. A door that reverses before closing usually points to misaligned safety sensors. When a door is past repair, replacement with an insulated model can make a garage warmer and quieter.</p>
@@ -310,13 +323,13 @@
           <div><dt>Location</dt><dd>Waukesha, WI 53186</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
           <div><dt>Hours</dt><dd>Mon–Sat</dd></div>
-          <div><dt>Website</dt><dd><a href="https://waukeshagaragedoorservice.com">waukeshagaragedoorservice.com</a></dd></div>
+          <div><dt>Website</dt><dd>waukeshagaragedoorservice.com</dd></div>
         </dl>
-        <a class="btn" href="https://waukeshagaragedoorservice.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Waukesha, Wisconsin</p>
-        <h2><a href="https://waukeshagaragedoorservice.com">Waukesha Garage Door Service</a></h2>
+        <h2>Waukesha Garage Door Service</h2>
           <p>Waukesha Garage Door Service is built around speed. Its website promotes same-day service Monday through Saturday and asks customers to call before noon for a same-day visit. It also states that one visit fixes most repairs, which suggests trucks stocked with the parts that fail most often.</p>
           <p>The service list is thorough. Repairs include spring, cable, roller, panel, track and drum replacement, along with general garage door repair and tune-ups. For new doors, the company handles installation and offers a range of materials and styles, including custom doors. Opener installation and repair round out the list. The site says the company works on all major brands.</p>
           <p>Pricing is put in writing before work starts, and quote requests are free. For a homeowner, a written price removes the worry of a bill that grows once the job is under way.</p>
@@ -339,13 +352,13 @@
           <div><dt>Location</dt><dd>Menomonee Falls, WI 53051</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
           <div><dt>Hours</dt><dd>Mon–Fri 7 AM–7 PM · Sat 8 AM–5 PM · Sun emergency calls</dd></div>
-          <div><dt>Website</dt><dd><a href="https://menomoneefallsgaragedoorrepair.com">menomoneefallsgaragedoorrepair.com</a></dd></div>
+          <div><dt>Website</dt><dd>menomoneefallsgaragedoorrepair.com</dd></div>
         </dl>
-        <a class="btn" href="https://menomoneefallsgaragedoorrepair.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Menomonee Falls, Wisconsin</p>
-        <h2><a href="https://menomoneefallsgaragedoorrepair.com">Menomonee Falls Garage Door Repair</a></h2>
+        <h2>Menomonee Falls Garage Door Repair</h2>
           <p>Menomonee Falls Garage Door Repair is open seven days a week. Its posted hours are 7 AM to 7 PM on weekdays and 8 AM to 5 PM on Saturday, with Sunday reserved for emergency calls. The company&#x27;s website says that if you call in the morning, a technician can reach you before the day is out in most cases.</p>
           <p>The site counts 14 garage door services. They include same-day repair, replacement of springs, cables, rollers, panels, tracks and drums, new door installation with a choice of materials and styles, custom doors, and opener installation and repair. Technicians are described as local, and their trucks are stocked so that repairs can be finished on the first visit.</p>
           <p>Safety gets specific attention. The company says its visits include safety checks such as auto-reverse and photo-eye tests. Those two features stop a closing door when something is in its path, and they are worth testing on any opener, especially in homes with children or pets.</p>
@@ -367,13 +380,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Muskego, WI 53150</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://muskegogaragedoorpros.com">muskegogaragedoorpros.com</a></dd></div>
+          <div><dt>Website</dt><dd>muskegogaragedoorpros.com</dd></div>
         </dl>
-        <a class="btn" href="https://muskegogaragedoorpros.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Muskego, Wisconsin</p>
-        <h2><a href="https://muskegogaragedoorpros.com">Muskego Garage Door Pros</a></h2>
+        <h2>Muskego Garage Door Pros</h2>
           <p>Muskego Garage Door Pros serves the City of Muskego and its lake neighborhoods. The company&#x27;s website names Tess Corners, Little Muskego Lake, Big Muskego Lake and Lake Denoon among the areas it covers, a sign that it knows the community beyond the main roads.</p>
           <p>Services include garage door repair and same-day repair, with replacement of springs, cables, rollers, panels, tracks and drums. The company also installs new doors in a range of materials and styles, builds custom doors, and installs and repairs openers. The site says it works on all makes and models.</p>
           <p>Three points stand out in how the company describes its work. Same-day appointments are available. The price is quoted before work starts, and the quote is free with no obligation. Safety testing is done on every visit, so a repaired door is checked for proper balance and reversal before the technician leaves.</p>
@@ -395,13 +408,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Germantown, WI 53022</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://germantownelitegaragedoors.com">germantownelitegaragedoors.com</a></dd></div>
+          <div><dt>Website</dt><dd>germantownelitegaragedoors.com</dd></div>
         </dl>
-        <a class="btn" href="https://germantownelitegaragedoors.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Germantown, Wisconsin</p>
-        <h2><a href="https://germantownelitegaragedoors.com">Garage Doors Germantown WI</a></h2>
+        <h2>Garage Doors Germantown WI</h2>
           <p>Garage Doors Germantown WI serves Germantown and the surrounding parts of Washington, Waukesha and Ozaukee counties. The company&#x27;s work covers the full life of a garage door, from the first installation to the repairs that come years later.</p>
           <p>Repair services listed on its website include springs, cables, rollers, panels, tracks and drums, along with general garage door repair. For new doors, the company offers installation, a choice of materials and styles, and custom doors. It also installs and repairs openers. One item sets it apart from several others on this list, which is light commercial door work, useful for small shops, contractors and storage buildings.</p>
           <p>The site says the company does its best to provide same-day visits. Pricing is given upfront, quotes are free and carry no obligation, and technicians work on most major garage door and opener brands.</p>
@@ -424,13 +437,13 @@
           <div><dt>Location</dt><dd>Oconomowoc, WI 53066</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
           <div><dt>Hours</dt><dd>Mon–Sat, 7 AM–7 PM</dd></div>
-          <div><dt>Website</dt><dd><a href="https://oconomowocgaragedoor.com">oconomowocgaragedoor.com</a></dd></div>
+          <div><dt>Website</dt><dd>oconomowocgaragedoor.com</dd></div>
         </dl>
-        <a class="btn" href="https://oconomowocgaragedoor.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Oconomowoc, Wisconsin</p>
-        <h2><a href="https://oconomowocgaragedoor.com">Oconomowoc Garage Door</a></h2>
+        <h2>Oconomowoc Garage Door</h2>
           <p>Oconomowoc Garage Door serves Oconomowoc and the Lake Country communities around it. Its posted hours are Monday through Saturday, 7 AM to 7 PM, and its website says same-day service is available when customers call early.</p>
           <p>The company lists 14 garage door services. They include general and same-day repair, replacement of springs, cables, rollers, panels, tracks and drums, new door installation, a selection of materials and styles, custom doors, and opener installation and repair. The site also mentions annual tune-ups, a small expense that extends the life of springs and openers.</p>
           <p>Pricing is quoted before work starts. Quotes are free and come with no obligation.</p>
@@ -453,13 +466,13 @@
           <div><dt>Location</dt><dd>Pewaukee, WI 53072</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
           <div><dt>Hours</dt><dd>Mon–Sat, 7 AM–7 PM</dd></div>
-          <div><dt>Website</dt><dd><a href="https://pewaukeegaragedoors.com/">pewaukeegaragedoors.com</a></dd></div>
+          <div><dt>Website</dt><dd>pewaukeegaragedoors.com</dd></div>
         </dl>
-        <a class="btn" href="https://pewaukeegaragedoors.com/">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Pewaukee, Wisconsin</p>
-        <h2><a href="https://pewaukeegaragedoors.com/">Pewaukee Garage Doors</a></h2>
+        <h2>Pewaukee Garage Doors</h2>
           <p>Pewaukee Garage Doors serves both the Village and the City of Pewaukee, along with much of Lake Country and Waukesha County. Hours are Monday through Saturday, 7 AM to 7 PM.</p>
           <p>The company offers 14 services in all. They include garage door repair and emergency repair, replacement of springs, cables, rollers, panels, tracks and drums, new door installation, a range of materials and styles, custom doors, and opener installation and repair. Its website says it works on all makes and models.</p>
           <p>Same-day service is available when you call early, though the site is candid that it is not guaranteed. The price is given before work starts, and quotes are free with no obligation. Common parts are carried on the truck, which raises the odds that a broken spring or cable can be fixed in one trip. After each visit, the technician runs safety checks on the door.</p>
@@ -482,13 +495,13 @@
           <div><dt>Location</dt><dd>Elm Grove, WI 53122</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
           <div><dt>Hours</dt><dd>Mon–Sat, 7 AM–7 PM</dd></div>
-          <div><dt>Website</dt><dd><a href="https://elmgrovegaragedoor.com">elmgrovegaragedoor.com</a></dd></div>
+          <div><dt>Website</dt><dd>elmgrovegaragedoor.com</dd></div>
         </dl>
-        <a class="btn" href="https://elmgrovegaragedoor.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Elm Grove, Wisconsin</p>
-        <h2><a href="https://elmgrovegaragedoor.com">Elm Grove Garage Door</a></h2>
+        <h2>Elm Grove Garage Door</h2>
           <p>Elm Grove Garage Door serves the village of Elm Grove and nearby Waukesha County suburbs. It is open Monday through Saturday, 7 AM to 7 PM.</p>
           <p>The company&#x27;s services include garage door repair and same-day repair, replacement of springs, cables, rollers, panels, tracks and drums, new door installation, a choice of materials and styles, custom doors, and opener installation and repair.</p>
           <p>According to its website, same-day service is offered when customers call early. The site notes that this happens often but is not guaranteed, an honest way to set expectations. Pricing is given upfront before work begins, and quote requests are free. Trucks are stocked with parts, and safety checks are carried out on every visit.</p>
@@ -510,13 +523,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Nashotah, WI</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://nashotahgaragedoor.com">nashotahgaragedoor.com</a></dd></div>
+          <div><dt>Website</dt><dd>nashotahgaragedoor.com</dd></div>
         </dl>
-        <a class="btn" href="https://nashotahgaragedoor.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Nashotah, Wisconsin</p>
-        <h2><a href="https://nashotahgaragedoor.com">Nashotah Garage Door</a></h2>
+        <h2>Nashotah Garage Door</h2>
           <p>Nashotah Garage Door serves Nashotah and the surrounding Lake Country, including lake properties. Its website explains that the company does not keep offices in the communities it serves and instead travels to its customers.</p>
           <p>The range of work is the broadest on this list, with 42 services named on the site. For homes, that includes door installation, repair and replacement, spring, cable and track repair, and opener repair and installation. For businesses, the company works on commercial overhead doors and rolling steel doors. Emergency repair is offered as well, including repair after a break-in, when a damaged door leaves a garage unsecured.</p>
           <p>Estimates are given before work starts. The site also takes time to explain the parts involved. It notes, for example, that a standard torsion spring is rated for 10,000 cycles. At several openings and closings a day, that works out to a number of years, which is why springs are the most frequently replaced part of a door.</p>
@@ -538,13 +551,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Brookfield, WI 53005</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://brookfieldgaragedoorservice.com/">brookfieldgaragedoorservice.com</a></dd></div>
+          <div><dt>Website</dt><dd>brookfieldgaragedoorservice.com</dd></div>
         </dl>
-        <a class="btn" href="https://brookfieldgaragedoorservice.com/">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Brookfield, Wisconsin</p>
-        <h2><a href="https://brookfieldgaragedoorservice.com/">Brookfield Garage Door</a></h2>
+        <h2>Brookfield Garage Door</h2>
           <p>This is the second Brookfield entry on the list, found at brookfieldgaragedoorservice.com. It serves Brookfield&#x27;s 53005 ZIP code and a wide ring of nearby communities.</p>
           <p>The company&#x27;s website puts its promises in plain terms. Same-day service is available on most repair calls. Pricing is flat-rate, written and given upfront. Technicians are licensed and insured, and work carries a written warranty on parts and labor. Estimates are free. The site also says the average reply to an inquiry comes in under 10 minutes, a quick response for anyone dealing with a stuck door.</p>
           <p>Services include garage door repair, replacement of springs, cables, rollers, panels, tracks and drums, new door installation, a choice of materials and styles, custom doors, and opener installation and repair. The company services all major residential garage door and opener brands.</p>
@@ -566,13 +579,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Franklin, WI</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://garagedoorsfranklinwi.com">garagedoorsfranklinwi.com</a></dd></div>
+          <div><dt>Website</dt><dd>garagedoorsfranklinwi.com</dd></div>
         </dl>
-        <a class="btn" href="https://garagedoorsfranklinwi.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Franklin, Wisconsin</p>
-        <h2><a href="https://garagedoorsfranklinwi.com">Garage Doors Franklin WI</a></h2>
+        <h2>Garage Doors Franklin WI</h2>
           <p>Garage Doors Franklin WI serves Franklin and the southern suburbs of Milwaukee. Its website makes the point that the work happens in your driveway, which is another way of saying this is a mobile service that comes to the customer.</p>
           <p>Repairs make up much of the service list. The company fixes springs, cables, tracks, panels and sections, and it handles noisy doors and general overhead door problems. Same-day repair is one of the listed services. Beyond repairs, it offers new door installation, replacement and custom doors, opener repair and installation, and maintenance and tune-ups. Commercial door repair is available too.</p>
           <p>The site says customers receive a price before work begins, and that the company repairs every major door and opener brand.</p>
@@ -594,13 +607,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Hartland, WI</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://hartlandgaragedoorservice.com">hartlandgaragedoorservice.com</a></dd></div>
+          <div><dt>Website</dt><dd>hartlandgaragedoorservice.com</dd></div>
         </dl>
-        <a class="btn" href="https://hartlandgaragedoorservice.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Hartland, Wisconsin</p>
-        <h2><a href="https://hartlandgaragedoorservice.com">Hartland Garage Door Service</a></h2>
+        <h2>Hartland Garage Door Service</h2>
           <p>Hartland Garage Door Service covers Hartland and the surrounding Lake Country. Its website notes that the map shown there marks a service area and not a showroom or office, so this is a company that comes to you.</p>
           <p>What stands out is the variety of doors it works with. Residential services include installation, replacement, repair, maintenance and emergency service. Door styles listed on the site include carriage house, raised panel, contemporary, custom wood, all-glass and screen doors. Opener work covers installation, repair and accessories.</p>
           <p>The commercial and specialty list is just as wide. It includes commercial doors, dock doors, high-speed doors and fire-rated doors, along with pole barn doors and boat house doors. Those last two fit Lake Country well, where many properties have outbuildings and lakefront structures with openings of their own.</p>
@@ -622,13 +635,13 @@
             <div><dt>Phone</dt><dd><a href="tel:+12625551234">(262) 555-1234</a></dd></div> -->
           <div><dt>Location</dt><dd>Delafield, WI</dd></div>
           <!-- EDIT: replace the Location row above with the full street address, labelled "Address" -->
-          <div><dt>Website</dt><dd><a href="https://delafieldgaragedoor.com">delafieldgaragedoor.com</a></dd></div>
+          <div><dt>Website</dt><dd>delafieldgaragedoor.com</dd></div>
         </dl>
-        <a class="btn" href="https://delafieldgaragedoor.com">Visit website</a>
+        
       </div>
       <div class="body">
         <p class="city">Delafield, Wisconsin</p>
-        <h2><a href="https://delafieldgaragedoor.com">Delafield Garage Door</a></h2>
+        <h2>Delafield Garage Door</h2>
           <p>Delafield Garage Door serves Delafield and the Lake Country area of Wisconsin. Its services span residential and commercial work, with several extras that many garage door companies do not advertise.</p>
           <p>For homes, the company offers garage door repair, installation, replacement and maintenance. It works with custom and wood doors, repairs springs, cables and other parts, and installs and repairs openers. For businesses, it services commercial overhead doors and rolling steel doors. Emergency garage door repair is on the list, as are lock work and weatherstripping.</p>
           <p>Weatherstripping deserves a mention in this climate. Worn seals along the bottom and sides of a door let in cold air, snowmelt and pests. Replacing them is a modest job that makes a garage noticeably more comfortable in January.</p>
@@ -638,7 +651,7 @@
       </div>
     </article>
 
-    <p class="note">Company details on this page come from each company's own website. Contact the company directly to confirm services, pricing, hours and availability.</p>
+    <p class="note">Company details and service areas on this page come from each company's own website. Contact the company directly to confirm services, pricing, hours and availability.</p>
   </div>
 </main>
 
@@ -649,6 +662,6 @@
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 <script src="leaflet.js"></script>
 <script src="map.js"></script>
-<script>drawCityMap('citymap', [{"n": "Ashippun", "s": "ashippun", "lat": 43.2119, "lon": -88.5162, "k": 1}, {"n": "Big Bend", "s": "big-bend", "lat": 42.8814, "lon": -88.2068, "k": 3}, {"n": "Brookfield", "s": "brookfield", "lat": 43.0606, "lon": -88.1065, "k": 10}, {"n": "Butler", "s": "butler", "lat": 43.1058, "lon": -88.0695, "k": 4}, {"n": "Caledonia", "s": "caledonia", "lat": 42.8078, "lon": -87.9243, "k": 1}, {"n": "Cedarburg", "s": "cedarburg", "lat": 43.2967, "lon": -87.9876, "k": 1}, {"n": "Chenequa", "s": "chenequa", "lat": 43.1253, "lon": -88.3829, "k": 4}, {"n": "Colgate", "s": "colgate", "lat": 43.1998, "lon": -88.2406, "k": 2}, {"n": "Delafield", "s": "delafield", "lat": 43.0608, "lon": -88.4037, "k": 7}, {"n": "Dousman", "s": "dousman", "lat": 43.0142, "lon": -88.4726, "k": 2}, {"n": "Elm Grove", "s": "elm-grove", "lat": 43.0431, "lon": -88.079, "k": 5}, {"n": "Franklin", "s": "franklin", "lat": 42.8886, "lon": -88.0384, "k": 3}, {"n": "Genesee", "s": "genesee", "lat": 42.9601, "lon": -88.3745, "k": 2}, {"n": "Germantown", "s": "germantown", "lat": 43.2286, "lon": -88.1104, "k": 3}, {"n": "Greendale", "s": "greendale", "lat": 42.9406, "lon": -87.9959, "k": 2}, {"n": "Greenfield", "s": "greenfield", "lat": 42.9614, "lon": -88.0126, "k": 5}, {"n": "Hales Corners", "s": "hales-corners", "lat": 42.9375, "lon": -88.0487, "k": 5}, {"n": "Hartland", "s": "hartland", "lat": 43.105, "lon": -88.342, "k": 6}, {"n": "Hubertus", "s": "hubertus", "lat": 43.2343, "lon": -88.2311, "k": 2}, {"n": "Ixonia", "s": "ixonia", "lat": 43.1439, "lon": -88.5973, "k": 1}, {"n": "Jackson", "s": "jackson", "lat": 43.3239, "lon": -88.1668, "k": 1}, {"n": "Lac La Belle", "s": "lac-la-belle", "lat": 43.13, "lon": -88.521, "k": 1}, {"n": "Lannon", "s": "lannon", "lat": 43.1461, "lon": -88.1662, "k": 4}, {"n": "Lisbon", "s": "lisbon", "lat": 43.163, "lon": -88.245, "k": 2}, {"n": "Menomonee Falls", "s": "menomonee-falls", "lat": 43.1789, "lon": -88.1173, "k": 6}, {"n": "Mequon", "s": "mequon", "lat": 43.2156, "lon": -88.03, "k": 2}, {"n": "Merton", "s": "merton", "lat": 43.1467, "lon": -88.3068, "k": 5}, {"n": "Milwaukee", "s": "milwaukee", "lat": 43.0389, "lon": -87.9065, "k": 4}, {"n": "Mukwonago", "s": "mukwonago", "lat": 42.8667, "lon": -88.3334, "k": 2}, {"n": "Muskego", "s": "muskego", "lat": 42.9059, "lon": -88.139, "k": 4}, {"n": "Nashotah", "s": "nashotah", "lat": 43.0978, "lon": -88.4023, "k": 6}, {"n": "New Berlin", "s": "new-berlin", "lat": 42.9764, "lon": -88.1084, "k": 8}, {"n": "North Lake", "s": "north-lake", "lat": 43.1561, "lon": -88.3707, "k": 1}, {"n": "Oak Creek", "s": "oak-creek", "lat": 42.8858, "lon": -87.8631, "k": 1}, {"n": "Oconomowoc", "s": "oconomowoc", "lat": 43.1117, "lon": -88.4993, "k": 5}, {"n": "Oconomowoc Lake", "s": "oconomowoc-lake", "lat": 43.099, "lon": -88.46, "k": 1}, {"n": "Okauchee", "s": "okauchee", "lat": 43.113, "lon": -88.4323, "k": 5}, {"n": "Pewaukee", "s": "pewaukee", "lat": 43.0806, "lon": -88.2612, "k": 9}, {"n": "Raymond", "s": "raymond", "lat": 42.79, "lon": -88.02, "k": 1}, {"n": "Richfield", "s": "richfield", "lat": 43.2561, "lon": -88.194, "k": 2}, {"n": "South Milwaukee", "s": "south-milwaukee", "lat": 42.9106, "lon": -87.8606, "k": 1}, {"n": "Summit", "s": "summit", "lat": 43.07, "lon": -88.465, "k": 3}, {"n": "Sussex", "s": "sussex", "lat": 43.1339, "lon": -88.222, "k": 6}, {"n": "Vernon", "s": "vernon", "lat": 42.9, "lon": -88.27, "k": 3}, {"n": "Wales", "s": "wales", "lat": 43.0044, "lon": -88.3768, "k": 5}, {"n": "Waterford", "s": "waterford", "lat": 42.7631, "lon": -88.2143, "k": 1}, {"n": "Watertown", "s": "watertown", "lat": 43.1947, "lon": -88.729, "k": 1}, {"n": "Waukesha", "s": "waukesha", "lat": 43.0117, "lon": -88.2315, "k": 8}, {"n": "Wauwatosa", "s": "wauwatosa", "lat": 43.0495, "lon": -88.0076, "k": 6}, {"n": "West Allis", "s": "west-allis", "lat": 43.0167, "lon": -88.007, "k": 3}, {"n": "West Bend", "s": "west-bend", "lat": 43.4253, "lon": -88.1834, "k": 1}, {"n": "West Milwaukee", "s": "west-milwaukee", "lat": 43.0125, "lon": -87.9726, "k": 1}, {"n": "Wind Lake", "s": "wind-lake", "lat": 42.8295, "lon": -88.1587, "k": 2}], { base: '' });</script>
+<script>drawCityMap(document.getElementById('citymap'), [{"n":"Ashippun","s":"ashippun","lat":43.2119,"lon":-88.5162,"k":1,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Big Bend","s":"big-bend","lat":42.8814,"lon":-88.2068,"k":3,"co":[{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""}]},{"n":"Brookfield","s":"brookfield","lat":43.0606,"lon":-88.1065,"k":10,"co":[{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""}]},{"n":"Butler","s":"butler","lat":43.1058,"lon":-88.0695,"k":4,"co":[{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"Caledonia","s":"caledonia","lat":42.8078,"lon":-87.9243,"k":1,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""}]},{"n":"Cedarburg","s":"cedarburg","lat":43.2967,"lon":-87.9876,"k":1,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""}]},{"n":"Chenequa","s":"chenequa","lat":43.1253,"lon":-88.3829,"k":4,"co":[{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Colgate","s":"colgate","lat":43.1998,"lon":-88.2406,"k":2,"co":[{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""}]},{"n":"Delafield","s":"delafield","lat":43.0608,"lon":-88.4037,"k":7,"co":[{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Dousman","s":"dousman","lat":43.0142,"lon":-88.4726,"k":2,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""}]},{"n":"Elm Grove","s":"elm-grove","lat":43.0431,"lon":-88.079,"k":5,"co":[{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""}]},{"n":"Franklin","s":"franklin","lat":42.8886,"lon":-88.0384,"k":3,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Genesee","s":"genesee","lat":42.9601,"lon":-88.3745,"k":2,"co":[{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Germantown","s":"germantown","lat":43.2286,"lon":-88.1104,"k":3,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Greendale","s":"greendale","lat":42.9406,"lon":-87.9959,"k":2,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Greenfield","s":"greenfield","lat":42.9614,"lon":-88.0126,"k":5,"co":[{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Hales Corners","s":"hales-corners","lat":42.9375,"lon":-88.0487,"k":5,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Hartland","s":"hartland","lat":43.105,"lon":-88.342,"k":6,"co":[{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Hubertus","s":"hubertus","lat":43.2343,"lon":-88.2311,"k":2,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"Ixonia","s":"ixonia","lat":43.1439,"lon":-88.5973,"k":1,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Jackson","s":"jackson","lat":43.3239,"lon":-88.1668,"k":1,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""}]},{"n":"Lac La Belle","s":"lac-la-belle","lat":43.13,"lon":-88.521,"k":1,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Lannon","s":"lannon","lat":43.1461,"lon":-88.1662,"k":4,"co":[{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Lisbon","s":"lisbon","lat":43.163,"lon":-88.245,"k":2,"co":[{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"Menomonee Falls","s":"menomonee-falls","lat":43.1789,"lon":-88.1173,"k":6,"co":[{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""}]},{"n":"Mequon","s":"mequon","lat":43.2156,"lon":-88.03,"k":2,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"Merton","s":"merton","lat":43.1467,"lon":-88.3068,"k":5,"co":[{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Milwaukee","s":"milwaukee","lat":43.0389,"lon":-87.9065,"k":4,"co":[{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"Mukwonago","s":"mukwonago","lat":42.8667,"lon":-88.3334,"k":2,"co":[{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Muskego","s":"muskego","lat":42.9059,"lon":-88.139,"k":4,"co":[{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Nashotah","s":"nashotah","lat":43.0978,"lon":-88.4023,"k":6,"co":[{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"New Berlin","s":"new-berlin","lat":42.9764,"lon":-88.1084,"k":8,"co":[{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""}]},{"n":"North Lake","s":"north-lake","lat":43.1561,"lon":-88.3707,"k":1,"co":[{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""}]},{"n":"Oak Creek","s":"oak-creek","lat":42.8858,"lon":-87.8631,"k":1,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""}]},{"n":"Oconomowoc","s":"oconomowoc","lat":43.1117,"lon":-88.4993,"k":5,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Oconomowoc Lake","s":"oconomowoc-lake","lat":43.099,"lon":-88.46,"k":1,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Okauchee","s":"okauchee","lat":43.113,"lon":-88.4323,"k":5,"co":[{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""}]},{"n":"Pewaukee","s":"pewaukee","lat":43.0806,"lon":-88.2612,"k":9,"co":[{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Raymond","s":"raymond","lat":42.79,"lon":-88.02,"k":1,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""}]},{"n":"Richfield","s":"richfield","lat":43.2561,"lon":-88.194,"k":2,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"South Milwaukee","s":"south-milwaukee","lat":42.9106,"lon":-87.8606,"k":1,"co":[{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""}]},{"n":"Summit","s":"summit","lat":43.07,"lon":-88.465,"k":3,"co":[{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""}]},{"n":"Sussex","s":"sussex","lat":43.1339,"lon":-88.222,"k":6,"co":[{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""}]},{"n":"Vernon","s":"vernon","lat":42.9,"lon":-88.27,"k":3,"co":[{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Wales","s":"wales","lat":43.0044,"lon":-88.3768,"k":5,"co":[{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""},{"n":"Hartland Garage Door Service","a":"hartland","b":"Hartland","p":"","t":""},{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""}]},{"n":"Waterford","s":"waterford","lat":42.7631,"lon":-88.2143,"k":1,"co":[{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""}]},{"n":"Watertown","s":"watertown","lat":43.1947,"lon":-88.729,"k":1,"co":[{"n":"Oconomowoc Garage Door","a":"oconomowoc","b":"Oconomowoc","p":"","t":""}]},{"n":"Waukesha","s":"waukesha","lat":43.0117,"lon":-88.2315,"k":8,"co":[{"n":"Waukesha Garage Door Service","a":"waukesha","b":"Waukesha","p":"","t":""},{"n":"Pewaukee Garage Doors","a":"pewaukee","b":"Pewaukee","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Delafield Garage Door","a":"delafield","b":"Delafield","p":"","t":""},{"n":"Nashotah Garage Door","a":"nashotah","b":"Nashotah","p":"","t":""}]},{"n":"Wauwatosa","s":"wauwatosa","lat":43.0495,"lon":-88.0076,"k":6,"co":[{"n":"Wauwatosa Garage Door Repair","a":"wauwatosa","b":"Wauwatosa","p":"","t":""},{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield","b":"Brookfield","p":"(920) 697-6055","t":"+19206976055"},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Menomonee Falls Garage Door Repair","a":"menomonee-falls","b":"Menomonee Falls","p":"","t":""}]},{"n":"West Allis","s":"west-allis","lat":43.0167,"lon":-88.007,"k":3,"co":[{"n":"Elm Grove Garage Door","a":"elm-grove","b":"Elm Grove","p":"","t":""},{"n":"New Berlin Garage Doors","a":"new-berlin","b":"New Berlin","p":"","t":""},{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"West Bend","s":"west-bend","lat":43.4253,"lon":-88.1834,"k":1,"co":[{"n":"Garage Doors Germantown WI","a":"germantown","b":"Germantown","p":"","t":""}]},{"n":"West Milwaukee","s":"west-milwaukee","lat":43.0125,"lon":-87.9726,"k":1,"co":[{"n":"Brookfield Garage Door","a":"brookfield-2","b":"Brookfield","p":"","t":""}]},{"n":"Wind Lake","s":"wind-lake","lat":42.8295,"lon":-88.1587,"k":2,"co":[{"n":"Muskego Garage Door Pros","a":"muskego","b":"Muskego","p":"","t":""},{"n":"Garage Doors Franklin WI","a":"franklin","b":"Franklin","p":"","t":""}]}]);</script>
 </body>
 </html>

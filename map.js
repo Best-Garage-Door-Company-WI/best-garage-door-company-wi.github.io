@@ -1,39 +1,44 @@
-/* City map: draws one numbered pin per city; clicking a pin opens that city's page. */
+/* City map: one numbered pin per city. Clicking a pin (or a city in the list) opens a box
+   listing the companies that serve it, with links to their profiles further down this page. */
 (function () {
-  function pinIcon(k, active) {
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function pinIcon(k) {
     var size = Math.round(22 + Math.min(k, 10) * 1.4);
-    return L.divIcon({
-      className: '',
-      html: '<span class="pin' + (active ? ' pin-active' : '') + '" style="width:' + size + 'px;height:' + size + 'px">' + k + '</span>',
-      iconSize: [size, size], iconAnchor: [size / 2, size / 2]
-    });
+    return L.divIcon({ className: '', html: '<span class="pin" style="width:' + size + 'px;height:' + size + 'px">' + k + '</span>',
+                       iconSize: [size, size], iconAnchor: [size / 2, size / 2] });
   }
-  window.drawCityMap = function (el, cities, opts) {
-    opts = opts || {};
+  function popupHtml(c) {
+    var rows = c.co.map(function (b) {
+      return '<li><a class="pp-name" href="#' + b.a + '">' + esc(b.n) + '</a>' +
+             '<span class="pp-meta">' + (b.b === c.n ? 'Local' : 'Based in ' + esc(b.b)) +
+             (b.p ? ' · <a href="tel:' + b.t + '">' + esc(b.p) + '</a>' : '') + '</span></li>';
+    }).join('');
+    return '<div class="pp"><p class="pp-city">' + esc(c.n) + ', WI</p><p class="pp-count">' + c.k +
+           (c.k === 1 ? ' company serves this city' : ' companies serve this city') + '</p><ol>' + rows + '</ol></div>';
+  }
+  window.drawCityMap = function (el, cities) {
     var map = L.map(el, { scrollWheelZoom: false, zoomSnap: 0.25 });
+    map.attributionControl.setPrefix(false);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
-    var pts = [];
+    var markers = {}, pts = [];
     cities.forEach(function (c) {
-      var active = opts.active === c.s;
-      var m = L.marker([c.lat, c.lon], { icon: pinIcon(c.k, active), title: c.n, keyboard: true,
-                                         zIndexOffset: active ? 1000 : c.k * 10 }).addTo(map);
-      m.bindTooltip('<b>' + c.n + ', WI</b><br>' + c.k + (c.k === 1 ? ' company' : ' companies'),
-                    { direction: 'top', offset: [0, -14], permanent: active });
-      m.on('click', function () { window.location.href = opts.base + c.s + '.html'; });
-      pts.push([c.lat, c.lon]);
+      var m = L.marker([c.lat, c.lon], { icon: pinIcon(c.k), title: c.n, keyboard: true, zIndexOffset: c.k * 10 }).addTo(map);
+      m.bindTooltip('<b>' + esc(c.n) + ', WI</b><br>' + c.k + (c.k === 1 ? ' company' : ' companies'), { direction: 'top', offset: [0, -14] });
+      m.bindPopup(popupHtml(c), { maxWidth: 300, minWidth: 240, autoPanPadding: [24, 24] });
+      m.on('popupopen', function () { m.closeTooltip(); });
+      markers[c.s] = m; pts.push([c.lat, c.lon]);
     });
-    (opts.extra || []).forEach(function (p) {
-      L.circleMarker([p.lat, p.lon], { radius: 5, color: '#16191d', weight: 2, fillColor: '#fff', fillOpacity: 1 })
-        .bindTooltip(p.label, { direction: 'right', offset: [8, 0] }).addTo(map);
-      if (opts.to) L.polyline([[p.lat, p.lon], [opts.to.lat, opts.to.lon]],
-                              { color: '#c98600', weight: 2, dashArray: '4 6', opacity: .8 }).addTo(map);
-      pts.push([p.lat, p.lon]);
+    map.fitBounds(pts, { padding: [44, 44] });
+    document.querySelectorAll('[data-city]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var m = markers[btn.getAttribute('data-city')];
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        map.setView(m.getLatLng(), Math.max(map.getZoom(), 11));
+        m.openPopup();
+      });
     });
-    if (opts.center) map.setView(opts.center, opts.zoom || 11);
-    else map.fitBounds(pts, { padding: [44, 44] });
     return map;
   };
 })();
